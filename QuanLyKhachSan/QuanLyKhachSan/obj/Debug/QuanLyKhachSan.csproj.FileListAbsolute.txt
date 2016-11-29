@@ -1,0 +1,10 @@
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\bin\Debug\QuanLyKhachSan.exe.config
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\bin\Debug\QuanLyKhachSan.exe
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\bin\Debug\QuanLyKhachSan.pdb
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.csprojResolveAssemblyReference.cache
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.Properties.Resources.resources
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.csproj.GenerateResource.Cache
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.exe
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.pdb
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.TaoTaiKhoanUI.resources
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.KhachHang.DangNhapUI.resources
