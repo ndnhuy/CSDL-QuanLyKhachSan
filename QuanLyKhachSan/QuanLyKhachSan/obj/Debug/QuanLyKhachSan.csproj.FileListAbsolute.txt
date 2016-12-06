@@ -8,3 +8,4 @@ D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.pdb
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.TaoTaiKhoanUI.resources
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.KhachHang.DangNhapUI.resources
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.KhachSan.ThongTinKhachSanUI.resources

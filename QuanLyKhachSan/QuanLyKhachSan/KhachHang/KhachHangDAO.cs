@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,12 +11,16 @@ namespace QuanLyKhachSan.KhachHang
 {
     public class KhachHangDAO
     {
+        // Lấy connection string từ file App.config
+        private String connectionString = ConfigurationManager.ConnectionStrings["QuanLyKhachSan"].ConnectionString;
+
+        // Tên của các stored procedured
         private const String SP_THEM_KHACH_HANG = "sp_themKhachHang";
         private const String SP_KIEM_TRA_TON_TAI = "sp_kiemtraKhachHangTonTai";
 
         public void add(KhachHang khachHang)
         {
-            SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QuanLyKhachSan;Integrated Security=True");
+            SqlConnection conn = new SqlConnection(connectionString);
             
             try
             {
@@ -49,7 +54,7 @@ namespace QuanLyKhachSan.KhachHang
 
         public bool exist(String tenDangNhap, String matKhau)
         {
-            SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QuanLyKhachSan;Integrated Security=True");
+            SqlConnection conn = new SqlConnection(connectionString);
 
             try
             {

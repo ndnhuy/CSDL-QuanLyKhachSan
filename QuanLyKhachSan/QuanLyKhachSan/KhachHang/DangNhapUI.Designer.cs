@@ -86,6 +86,7 @@
             this.buttonTaoTaiKhoan.TabIndex = 5;
             this.buttonTaoTaiKhoan.Text = "Tạo tài khoản";
             this.buttonTaoTaiKhoan.UseVisualStyleBackColor = true;
+            this.buttonTaoTaiKhoan.Click += new System.EventHandler(this.buttonTaoTaiKhoan_Click);
             // 
             // DangNhapUI
             // 

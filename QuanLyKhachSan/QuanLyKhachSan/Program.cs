@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyKhachSan.KhachHang;
+using System.Configuration;
+using QuanLyKhachSan.KhachSan;
 
 namespace QuanLyKhachSan
 {
@@ -61,10 +63,10 @@ namespace QuanLyKhachSan
             //        conn.Close();
             //    }
             //}
-
+           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TaoTaiKhoanUI());
+            Application.Run(new ThongTinKhachSanUI());
         }
     }
 }

@@ -13,6 +13,20 @@ create table KhachHang (
 	email nvarchar(30)
 )
 
+if object_id('KhachSan', 'U') is not null
+drop table KhachSan;
+
+create table KhachSan (
+	maKS int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	tenKS nvarchar(50) NOT NULL,
+	soSao int NOT NULL,
+	soNha varchar (10) NOT NULL,
+	duong nvarchar(50) NOT NULL,
+	quan nvarchar(20) NOT NULL,
+	thanhPho nvarchar(20) NOT NULL,
+	giaTB int NOT NULL,
+	moTa nvarchar(100) NOT NULL,
+)
 --Stored Procedured
 
 --Thêm khách hàng

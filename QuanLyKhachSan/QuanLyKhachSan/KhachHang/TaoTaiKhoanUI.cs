@@ -56,6 +56,11 @@ namespace QuanLyKhachSan
 
             KhachHangDAO khachHangDAO = new KhachHangDAO();
             khachHangDAO.add(khachHang);
+
+            // Sau khi đăng nhập thành công thì quay trở lại màn hình đăng nhập
+            MessageBox.Show("Đã tạo tài khoản thành công với tên đăng nhập là: " + khachHang.TenDangNhap);
+            new DangNhapUI().Show();
+            Hide();
         }
     }
 }

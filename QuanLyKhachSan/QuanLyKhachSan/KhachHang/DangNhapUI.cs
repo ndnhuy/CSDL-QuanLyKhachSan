@@ -21,5 +21,11 @@ namespace QuanLyKhachSan.KhachHang
         {
 
         }
+
+        private void buttonTaoTaiKhoan_Click(object sender, EventArgs e)
+        {
+            new TaoTaiKhoanUI().Show();
+            Hide();
+        }
     }
 }

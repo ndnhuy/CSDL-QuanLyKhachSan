@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,10 +65,20 @@
     <Compile Include="KhachHang\KhachHang.cs" />
     <Compile Include="KhachHang\KhachHangDAO.cs" />
     <Compile Include="KhachHang\ThemKhachHangException.cs" />
+    <Compile Include="KhachSan\KhachSanDAO.cs" />
+    <Compile Include="KhachSan\ThongTinKhachSanUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KhachSan\ThongTinKhachSanUI.Designer.cs">
+      <DependentUpon>ThongTinKhachSanUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="KhachHang\DangNhapUI.resx">
       <DependentUpon>DangNhapUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachSan\ThongTinKhachSanUI.resx">
+      <DependentUpon>ThongTinKhachSanUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
