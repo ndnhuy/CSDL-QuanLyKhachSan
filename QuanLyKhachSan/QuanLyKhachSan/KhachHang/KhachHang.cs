@@ -8,7 +8,7 @@ namespace QuanLyKhachSan.KhachHang
 {
     public class KhachHang
     {
-        public String MaKH { get; set; }
+        public int MaKH { get; set; }
         public String HoTen { get; set; }
         public String TenDangNhap { get; set; }
         public String MatKhau { get; set; }

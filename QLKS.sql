@@ -1,4 +1,15 @@
-﻿if object_id('KhachHang', 'U') is not null
+﻿
+
+-- KHÁCH HÀNG TABLE
+if object_id('DatPhong', 'U') is not null
+drop table DatPhong;
+if object_id('TrangThaiPhong', 'U') is not null
+drop table TrangThaiPhong;
+if object_id('Phong', 'U') is not null
+drop table Phong;
+if object_id('LoaiPhong', 'U') is not null
+drop table LoaiPhong;
+if object_id('KhachHang', 'U') is not null
 drop table KhachHang;
 
 create table KhachHang (
@@ -13,6 +24,7 @@ create table KhachHang (
 	email nvarchar(30)
 )
 
+-- KHÁCH SẠN TABLE
 if object_id('KhachSan', 'U') is not null
 drop table KhachSan;
 
@@ -27,6 +39,74 @@ create table KhachSan (
 	giaTB int NOT NULL,
 	moTa nvarchar(100) NOT NULL,
 )
+
+-- LOẠI PHÒNG TABLE
+if object_id('LoaiPhong', 'U') is not null
+drop table LoaiPhong;
+
+create table LoaiPhong (
+	maLoaiPhong int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	tenLoaiPhong nvarchar(50) NOT NULL,
+	maKS int,
+	donGia int NOT NULL,
+	moTa nvarchar(100) NOT NULL,
+	slTrong int NOT NULL
+)
+
+alter table LoaiPhong 
+add constraint FK_LoaiPhong_KhachSan foreign key (maKS) 
+references KhachSan (maKS);
+
+-- PHÒNG TABLE
+if object_id('Phong', 'U') is not null
+drop table Phong;
+
+create table Phong (
+	maPhong int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	loaiPhong int NOT NULL,
+	soPhong int NOT NULL
+)
+
+alter table Phong 
+add constraint FK_Phong_LoaiPhong foreign key (loaiPhong) 
+references LoaiPhong (maLoaiPhong);
+
+-- TRẠNG THÁI PHÒNG TABLE
+if object_id('TrangThaiPhong', 'U') is not null
+drop table TrangThaiPhong;
+
+create table TrangThaiPhong (
+	maPhong int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ngay date NOT NULL,
+	tinhTrang nvarchar(30) NOT NULL
+)
+alter table TrangThaiPhong 
+add constraint FK_TrangThaiPhong_Phong foreign key (maPhong) 
+references Phong (maPhong);
+
+-- ĐẶT PHÒNG TABLE
+if object_id('DatPhong', 'U') is not null
+drop table DatPhong;
+
+create table DatPhong (
+	maDP int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	maPhong int,
+	maKH int,
+	ngayBatDau date NOT NULL,
+	ngayTraPhong date NOT NULL,
+	ngayDat date NOT NULL,
+	donGia int NOT NULL,
+	moTa nvarchar(100) NOT NULL,
+	tinhTrang nvarchar(30) NOT NULL
+)
+alter table DatPhong 
+add constraint FK_DatPhong_Phong foreign key (maPhong) 
+references Phong (maPhong);
+
+alter table DatPhong 
+add constraint FK_DatPhong_KhachHang foreign key (maKH) 
+references KhachHang (maKH);
+
 --Stored Procedured
 
 --Thêm khách hàng
@@ -75,8 +155,7 @@ go
 		@matKhau nvarchar(30)
 
 as
-	
+
 	select @maKH = kh.maKH 
 	from KhachHang kh
 	where kh.tenDangNhap = @tenDangNhap AND kh.matKhau = @matKhau
-

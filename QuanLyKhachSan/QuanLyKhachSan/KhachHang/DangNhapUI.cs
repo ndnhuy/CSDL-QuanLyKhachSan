@@ -12,6 +12,7 @@ namespace QuanLyKhachSan.KhachHang
 {
     public partial class DangNhapUI : Form
     {
+        private KhachHangDAO khachHangDAO = new KhachHangDAO();
         public DangNhapUI()
         {
             InitializeComponent();
@@ -19,6 +20,16 @@ namespace QuanLyKhachSan.KhachHang
 
         private void buttonDangNhap_Click(object sender, EventArgs e)
         {
+            if (!khachHangDAO.exist(textBoxTenDangNhap.Text, textBoxMatKhau.Text))
+            {
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng.");
+                return;
+            }
+
+            KhachHang kh = khachHangDAO.getKhachHang(textBoxTenDangNhap.Text);
+            MessageBox.Show(String.Format("Chào mừng khách hàng {0} với mã số {1}",
+                                          kh.HoTen,
+                                          kh.MaKH));
 
         }
 

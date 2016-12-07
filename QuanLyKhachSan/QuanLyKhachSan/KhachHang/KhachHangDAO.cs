@@ -17,6 +17,54 @@ namespace QuanLyKhachSan.KhachHang
         // Tên của các stored procedured
         private const String SP_THEM_KHACH_HANG = "sp_themKhachHang";
         private const String SP_KIEM_TRA_TON_TAI = "sp_kiemtraKhachHangTonTai";
+        private const String TABLE_NAME_KHACHHANG = "KhachHang";
+
+        public KhachHang getKhachHang(string tenDangNhap)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            SqlDataReader reader = null;
+            try
+            {
+                conn.Open();
+
+                String query = String.Format("select * from {0} where tenDangNhap = {1}",
+                                                               TABLE_NAME_KHACHHANG,
+                                                               "'" + tenDangNhap + "'");
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    KhachHang kh = new KhachHang();
+                    kh.MaKH = (int)reader["maKH"];
+                    kh.HoTen = (string)reader["hoTen"];
+                    kh.TenDangNhap = (string)reader["tenDangNhap"];
+                    kh.SoCMND = (string)reader["soCMND"];
+                    kh.DiaChi = (string)reader["diaChi"];
+                    kh.SoDienThoai = (string)reader["soDienThoai"];
+                    kh.MoTa = (string)reader["moTa"];
+                    kh.Email = (string)reader["email"];
+                    return kh;
+                }
+
+                return null;
+            }
+            catch (SqlException ex)
+            {
+                throw new ThemKhachHangException(ex.Message);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
 
         public void add(KhachHang khachHang)
         {
@@ -64,11 +112,12 @@ namespace QuanLyKhachSan.KhachHang
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("@tenDangNhap", SqlDbType.NVarChar).Value = tenDangNhap;
                 command.Parameters.Add("@matKhau", SqlDbType.NVarChar).Value = matKhau;
-                command.Parameters.Add("@maKH", SqlDbType.Int).Direction = ParameterDirection.Output;
+                SqlParameter maKH = command.Parameters.Add("@maKH", SqlDbType.Int);
+                maKH.Direction = ParameterDirection.Output;
 
                 command.ExecuteNonQuery();
 
-                return true;
+                return maKH.Value != DBNull.Value;
             }
             catch (SqlException ex)
             {
