@@ -39,16 +39,23 @@
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.checkboxGiaTB = new System.Windows.Forms.CheckBox();
             this.checkboxHangSao = new System.Windows.Forms.CheckBox();
+            this.btnDatPhong = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridviewKhachSan)).BeginInit();
             this.SuspendLayout();
             // 
             // gridviewKhachSan
             // 
+            this.gridviewKhachSan.AllowUserToAddRows = false;
+            this.gridviewKhachSan.AllowUserToDeleteRows = false;
             this.gridviewKhachSan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridviewKhachSan.Location = new System.Drawing.Point(12, 177);
+            this.gridviewKhachSan.MultiSelect = false;
             this.gridviewKhachSan.Name = "gridviewKhachSan";
+            this.gridviewKhachSan.ReadOnly = true;
+            this.gridviewKhachSan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridviewKhachSan.Size = new System.Drawing.Size(781, 150);
             this.gridviewKhachSan.TabIndex = 0;
+            this.gridviewKhachSan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridviewKhachSan_CellContentClick);
             // 
             // txtFrom
             // 
@@ -115,7 +122,7 @@
             this.txtThanhPho.Name = "txtThanhPho";
             this.txtThanhPho.Size = new System.Drawing.Size(100, 20);
             this.txtThanhPho.TabIndex = 9;
-            this.txtThanhPho.Text = "TP.HCM";
+            this.txtThanhPho.Text = "Hồ Chí Minh";
             // 
             // btnTimKiem
             // 
@@ -149,11 +156,22 @@
             this.checkboxHangSao.UseVisualStyleBackColor = true;
             this.checkboxHangSao.CheckedChanged += new System.EventHandler(this.checkboxHangSao_CheckedChanged);
             // 
+            // btnDatPhong
+            // 
+            this.btnDatPhong.Location = new System.Drawing.Point(396, 113);
+            this.btnDatPhong.Name = "btnDatPhong";
+            this.btnDatPhong.Size = new System.Drawing.Size(75, 23);
+            this.btnDatPhong.TabIndex = 13;
+            this.btnDatPhong.Text = "Đặt Phòng";
+            this.btnDatPhong.UseVisualStyleBackColor = true;
+            this.btnDatPhong.Click += new System.EventHandler(this.btnDatPhong_Click);
+            // 
             // ThongTinKhachSanUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 352);
+            this.Controls.Add(this.btnDatPhong);
             this.Controls.Add(this.checkboxHangSao);
             this.Controls.Add(this.checkboxGiaTB);
             this.Controls.Add(this.btnTimKiem);
@@ -187,5 +205,6 @@
         private System.Windows.Forms.Button btnTimKiem;
         private System.Windows.Forms.CheckBox checkboxGiaTB;
         private System.Windows.Forms.CheckBox checkboxHangSao;
+        private System.Windows.Forms.Button btnDatPhong;
     }
 }

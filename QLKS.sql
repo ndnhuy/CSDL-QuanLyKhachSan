@@ -45,10 +45,10 @@ if object_id('LoaiPhong', 'U') is not null
 drop table LoaiPhong;
 
 create table LoaiPhong (
-	maLoaiPhong int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	maLoaiPhong int IDENTITY(1,1) PRIMARY KEY,
 	tenLoaiPhong nvarchar(50) NOT NULL,
 	maKS int,
-	donGia int NOT NULL,
+	donGia int,
 	moTa nvarchar(100) NOT NULL,
 	slTrong int NOT NULL
 )
@@ -62,9 +62,9 @@ if object_id('Phong', 'U') is not null
 drop table Phong;
 
 create table Phong (
-	maPhong int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	loaiPhong int NOT NULL,
-	soPhong int NOT NULL
+	maPhong int IDENTITY(1,1) PRIMARY KEY,
+	loaiPhong int,
+	soPhong int
 )
 
 alter table Phong 
@@ -76,7 +76,7 @@ if object_id('TrangThaiPhong', 'U') is not null
 drop table TrangThaiPhong;
 
 create table TrangThaiPhong (
-	maPhong int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	maPhong int PRIMARY KEY,
 	ngay date NOT NULL,
 	tinhTrang nvarchar(30) NOT NULL
 )
@@ -90,7 +90,7 @@ drop table DatPhong;
 
 create table DatPhong (
 	maDP int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	maPhong int,
+	maLoaiPhong int,
 	maKH int,
 	ngayBatDau date NOT NULL,
 	ngayTraPhong date NOT NULL,
@@ -100,12 +100,25 @@ create table DatPhong (
 	tinhTrang nvarchar(30) NOT NULL
 )
 alter table DatPhong 
-add constraint FK_DatPhong_Phong foreign key (maPhong) 
-references Phong (maPhong);
+add constraint FK_DatPhong_LoaiPhong foreign key (maLoaiPhong) 
+references LoaiPhong (maLoaiPhong);
 
 alter table DatPhong 
 add constraint FK_DatPhong_KhachHang foreign key (maKH) 
 references KhachHang (maKH);
+
+-- HÓA ĐƠN TABLE
+if object_id('HoaDon', 'U') is not null
+drop table HoaDon;
+create table HoaDon (
+	maHD int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ngayThanhToan date NOT NULL,
+	tongTien bigint,
+	maDP int 
+)
+alter table HoaDon 
+add constraint FK_HoaDon_DatPhong foreign key (maDP) 
+references DatPhong (maDP);
 
 --Stored Procedured
 
@@ -159,3 +172,42 @@ as
 	select @maKH = kh.maKH 
 	from KhachHang kh
 	where kh.tenDangNhap = @tenDangNhap AND kh.matKhau = @matKhau
+
+go
+-- Đặt phòng
+if object_id('sp_khachHangDatPhong') is not null
+	drop procedure sp_khachHangDatPhong;
+go
+
+	create procedure sp_khachHangDatPhong
+		@maLoaiPhong int,
+		@maKH int,
+		@ngayBatDau date,
+		@ngayTraPhong date,
+		@ngayDat date,
+		@donGia int,
+		@moTa nvarchar(100),
+		@tinhTrang nvarchar(30)
+as
+	insert into DatPhong(	
+							maLoaiPhong,
+							maKH,
+							ngayBatDau,
+							ngayTraPhong,
+							ngayDat,
+							donGia,
+							moTa,
+							tinhTrang
+						) 
+	values (
+		@maLoaiPhong,
+		@maKH,
+		@ngayBatDau,
+		@ngayTraPhong,
+		@ngayDat,
+		@donGia,
+		@moTa,
+		@tinhTrang
+	)
+
+go

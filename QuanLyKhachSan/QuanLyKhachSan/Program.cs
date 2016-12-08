@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using QuanLyKhachSan.KhachHang;
 using System.Configuration;
 using QuanLyKhachSan.KhachSan;
+using QuanLyKhachSan.Phong;
+using QuanLyKhachSan.HoaDon;
 
 namespace QuanLyKhachSan
 {
@@ -66,7 +68,7 @@ namespace QuanLyKhachSan
            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DangNhapUI());
+            Application.Run(new HoaDonUI());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyKhachSan.Phong;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -56,48 +57,60 @@ namespace QuanLyKhachSan.KhachSan
             txtFrom.Enabled = false;
             txtTo.Enabled = false;
             comboboxHangSao.Enabled = false;
+            gridviewKhachSan.SelectionChanged += GridviewKhachSan_SelectionChanged;
+
 
             gridviewKhachSan.DataSource = khachsanBindingSource;
 
             GetData(getQuery());
         }
 
+        private void GridviewKhachSan_SelectionChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void GridviewKhachSan_HandleCreated(object sender, EventArgs e)
+        {
+            Console.Write("CREATED");
+        }
+
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             GetData(getQuery());
+         
         }
 
         string getQuery()
         {
             if (checkboxGiaTB.Checked && checkboxHangSao.Checked)
             {
-                return String.Format("select * from KhachSan where ( (giaTB > {0} AND giaTB < {1}) and (soSao = {2}) ) and thanhPho = {3}",
+                return String.Format("select * from KhachSan where ( (giaTB > {0} AND giaTB < {1}) and (soSao = {2}) ) and thanhPho = N'{3}'",
                                     txtFrom.Text == "" ? "0" : txtFrom.Text,
                                     txtTo.Text == "" ? "0" : txtTo.Text,
                                     comboboxHangSao.SelectedItem,
-                                    "'" + txtThanhPho.Text + "'"
+                                    txtThanhPho.Text
                                     );
             }
 
             if (checkboxGiaTB.Checked)
             {
-                return String.Format("select * from KhachSan where (giaTB > {0} AND giaTB < {1}) AND thanhPho = {2}",
+                return String.Format("select * from KhachSan where (giaTB > {0} AND giaTB < {1}) AND thanhPho = N'{2}'",
                                     txtFrom.Text == "" ? "0" : txtFrom.Text,
                                     txtTo.Text == "" ? "0" : txtTo.Text,
-                                    "'" + txtThanhPho.Text + "'"
+                                    txtThanhPho.Text
                                     );
             }
 
             if (checkboxHangSao.Checked)
             {
-                return String.Format("select * from KhachSan where soSao = {0} AND thanhPho = {1}",
+                return String.Format("select * from KhachSan where soSao = {0} AND thanhPho = N'{1}'",
                                     comboboxHangSao.SelectedItem,
-                                    "'" + txtThanhPho.Text + "'"
+                                    txtThanhPho.Text
                                     );
             }
 
-            return String.Format("select * from KhachSan where thanhPho = {0}",
-                                "'" + txtThanhPho.Text + "'"
+            return String.Format("select * from KhachSan where thanhPho = N'{0}'",
+                                txtThanhPho.Text
                                 );
         }
 
@@ -116,6 +129,18 @@ namespace QuanLyKhachSan.KhachSan
         private void checkboxHangSao_CheckedChanged(object sender, EventArgs e)
         {
             comboboxHangSao.Enabled = ((CheckBox)sender).Checked;
+        }
+
+        private void gridviewKhachSan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+        }
+
+        private void btnDatPhong_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value.ToString());
+            new DatPhongUI((int)gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value).Show();
+            Hide();
         }
     }
 }

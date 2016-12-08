@@ -50,6 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HoaDon\HoaDon.cs" />
+    <Compile Include="HoaDon\HoaDonDAO.cs" />
+    <Compile Include="HoaDon\HoaDonUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HoaDon\HoaDonUI.Designer.cs">
+      <DependentUpon>HoaDonUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="KhachHang\DangNhapUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,13 +80,27 @@
     <Compile Include="KhachSan\ThongTinKhachSanUI.Designer.cs">
       <DependentUpon>ThongTinKhachSanUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Phong\DatPhongDAO.cs" />
+    <Compile Include="Phong\DatPhongUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Phong\DatPhongUI.Designer.cs">
+      <DependentUpon>DatPhongUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Phong\ThongTinDatPhong.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="HoaDon\HoaDonUI.resx">
+      <DependentUpon>HoaDonUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="KhachHang\DangNhapUI.resx">
       <DependentUpon>DangNhapUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KhachSan\ThongTinKhachSanUI.resx">
       <DependentUpon>ThongTinKhachSanUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Phong\DatPhongUI.resx">
+      <DependentUpon>DatPhongUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
