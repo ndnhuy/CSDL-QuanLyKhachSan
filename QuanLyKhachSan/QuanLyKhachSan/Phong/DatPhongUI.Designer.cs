@@ -48,6 +48,7 @@
             this.txtTenKH = new System.Windows.Forms.TextBox();
             this.txtTenLoaiPhong = new System.Windows.Forms.TextBox();
             this.btnDatPhong = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridviewPhong)).BeginInit();
             this.SuspendLayout();
             // 
@@ -227,11 +228,22 @@
             this.btnDatPhong.UseVisualStyleBackColor = true;
             this.btnDatPhong.Click += new System.EventHandler(this.btnDatPhong_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(726, 462);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DatPhongUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 497);
+            this.ClientSize = new System.Drawing.Size(809, 497);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnDatPhong);
             this.Controls.Add(this.txtTenLoaiPhong);
             this.Controls.Add(this.txtTenKH);
@@ -283,5 +295,6 @@
         private System.Windows.Forms.TextBox txtTenKH;
         private System.Windows.Forms.TextBox txtTenLoaiPhong;
         private System.Windows.Forms.Button btnDatPhong;
+        private System.Windows.Forms.Button button1;
     }
 }

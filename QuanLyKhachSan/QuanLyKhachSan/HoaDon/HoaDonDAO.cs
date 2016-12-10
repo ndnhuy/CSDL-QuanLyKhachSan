@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,48 @@ namespace QuanLyKhachSan.HoaDon
         // Lấy connection string từ file App.config
         private String connectionString = ConfigurationManager.ConnectionStrings["QuanLyKhachSan"].ConnectionString;
 
-        // Lập hóa đơn
+        private const String SP_LAP_HOA_DON = "sp_lapHoaDon";
+
+
+        // Lập hóa 
+        public String getQueryStringOfAllDatPhong()
+        {
+            return "select datphong.maDP, ks.tenKS, kh.hoTen, loaiphong.tenLoaiPhong, loaiphong.donGia, datphong.ngayBatDau, datphong.ngayTraPhong, datphong.ngayDat" +
+                                                 " from DatPhong datphong, LoaiPhong loaiphong, KhachSan ks, KhachHang kh where" +
+                                                 " datphong.maLoaiPhong = loaiphong.maLoaiPhong" +
+                                                 " AND datphong.maKH = kh.maKH" +
+                                                 " AND loaiphong.maKS = ks.maKS";
+        }
+
+        public void saveHoaDon(DateTime ngayThanhToan, long tongTien, int maDP)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            try
+            {
+                conn.Open();
+
+                SqlCommand command = new SqlCommand(SP_LAP_HOA_DON, conn);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@ngayThanhToan", SqlDbType.DateTime).Value = ngayThanhToan;
+                command.Parameters.Add("@tongTien", SqlDbType.BigInt).Value = tongTien;
+                command.Parameters.Add("@maDP", SqlDbType.Int).Value = maDP;
+                
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Xảy ra lỗi khi lưu hóa đơn");
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public HoaDon lapHoaDon(int maDP)
         {
             SqlConnection conn = new SqlConnection(connectionString);
@@ -26,35 +68,37 @@ namespace QuanLyKhachSan.HoaDon
                                                  " from DatPhong datphong, LoaiPhong loaiphong, KhachSan ks, KhachHang kh where" +
                                                  " datphong.maLoaiPhong = loaiphong.maLoaiPhong" +
                                                  " AND datphong.maKH = kh.maKH" +
-                                                 " AND loaiphong.maKS = ks.maKS"
+                                                 " AND loaiphong.maKS = ks.maKS" +
                                                  " AND datphong.maDP = {0}",
                                               maDP);
 
-                String query = String.Format("select * from {0} where tenDangNhap = {1}",
-                                                               TABLE_NAME_KHACHHANG,
-                                                               "'" + tenDangNhap + "'");
+            
                 SqlCommand cmd = new SqlCommand(query, conn);
 
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    KhachHang kh = new KhachHang();
-                    kh.MaKH = (int)reader["maKH"];
-                    kh.HoTen = (string)reader["hoTen"];
-                    kh.TenDangNhap = (string)reader["tenDangNhap"];
-                    kh.SoCMND = (string)reader["soCMND"];
-                    kh.DiaChi = (string)reader["diaChi"];
-                    kh.SoDienThoai = (string)reader["soDienThoai"];
-                    kh.MoTa = (string)reader["moTa"];
-                    kh.Email = (string)reader["email"];
-                    return kh;
+                    HoaDon hd = new HoaDon();
+                    hd.TenKhachSan = (String)reader["tenKS"];
+                    hd.TenKhachHang = (String)reader["hoTen"];
+                    hd.TenLoaiPhong = (String)reader["tenLoaiPhong"];
+                    hd.DonGia = (int)reader["donGia"];
+                    hd.NgayBatDau = (DateTime)reader["ngayBatDau"];
+                    hd.NgayTraPhong = (DateTime)reader["ngayTraPhong"];
+                    hd.NgayDat = (DateTime)reader["ngayDat"];
+
+                    hd.NgayThanhToan = DateTime.Now;
+                    hd.TongTien = (hd.NgayTraPhong - hd.NgayBatDau).Days * hd.DonGia;
+
+                    return hd;
                 }
 
                 return null;
             }
             catch (SqlException ex)
             {
-                throw new ThemKhachHangException(ex.Message);
+                Console.WriteLine("Có lỗi khi xuất hóa đơn");
+                throw ex;
             }
             finally
             {

@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.gridviewDatPhong = new System.Windows.Forms.DataGridView();
-            this.btnXuatHoaDon = new System.Windows.Forms.Button();
+            this.btnSaveHoaDon = new System.Windows.Forms.Button();
             this.txtMaDP = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnTimDP = new System.Windows.Forms.Button();
             this.dateNgayThanhToan = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,6 +50,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.checkboxTimKiemDP = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridviewDatPhong)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,38 +59,34 @@
             this.gridviewDatPhong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridviewDatPhong.Location = new System.Drawing.Point(12, 305);
             this.gridviewDatPhong.Name = "gridviewDatPhong";
+            this.gridviewDatPhong.ReadOnly = true;
+            this.gridviewDatPhong.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridviewDatPhong.Size = new System.Drawing.Size(577, 181);
             this.gridviewDatPhong.TabIndex = 0;
             this.gridviewDatPhong.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridviewDatPhong_CellContentClick);
             // 
-            // btnXuatHoaDon
+            // btnSaveHoaDon
             // 
-            this.btnXuatHoaDon.Location = new System.Drawing.Point(498, 276);
-            this.btnXuatHoaDon.Name = "btnXuatHoaDon";
-            this.btnXuatHoaDon.Size = new System.Drawing.Size(91, 23);
-            this.btnXuatHoaDon.TabIndex = 1;
-            this.btnXuatHoaDon.Text = "Xuất hóa đơn";
-            this.btnXuatHoaDon.UseVisualStyleBackColor = true;
+            this.btnSaveHoaDon.Location = new System.Drawing.Point(498, 276);
+            this.btnSaveHoaDon.Name = "btnSaveHoaDon";
+            this.btnSaveHoaDon.Size = new System.Drawing.Size(91, 23);
+            this.btnSaveHoaDon.TabIndex = 1;
+            this.btnSaveHoaDon.Text = "Lưu trữ";
+            this.btnSaveHoaDon.UseVisualStyleBackColor = true;
+            this.btnSaveHoaDon.Click += new System.EventHandler(this.btnSaveHoaDon_Click);
             // 
             // txtMaDP
             // 
-            this.txtMaDP.Location = new System.Drawing.Point(119, 16);
+            this.txtMaDP.Enabled = false;
+            this.txtMaDP.Location = new System.Drawing.Point(118, 12);
             this.txtMaDP.Name = "txtMaDP";
-            this.txtMaDP.Size = new System.Drawing.Size(200, 20);
+            this.txtMaDP.Size = new System.Drawing.Size(126, 20);
             this.txtMaDP.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Mã Đặt Phòng";
             // 
             // btnTimDP
             // 
-            this.btnTimDP.Location = new System.Drawing.Point(325, 16);
+            this.btnTimDP.Enabled = false;
+            this.btnTimDP.Location = new System.Drawing.Point(250, 12);
             this.btnTimDP.Name = "btnTimDP";
             this.btnTimDP.Size = new System.Drawing.Size(139, 23);
             this.btnTimDP.TabIndex = 4;
@@ -127,6 +123,7 @@
             // 
             this.txtTongTien.Location = new System.Drawing.Point(119, 101);
             this.txtTongTien.Name = "txtTongTien";
+            this.txtTongTien.ReadOnly = true;
             this.txtTongTien.Size = new System.Drawing.Size(269, 20);
             this.txtTongTien.TabIndex = 8;
             // 
@@ -246,11 +243,23 @@
             this.label11.TabIndex = 21;
             this.label11.Text = "KHÁCH SẠN";
             // 
+            // checkboxTimKiemDP
+            // 
+            this.checkboxTimKiemDP.AutoSize = true;
+            this.checkboxTimKiemDP.Location = new System.Drawing.Point(12, 14);
+            this.checkboxTimKiemDP.Name = "checkboxTimKiemDP";
+            this.checkboxTimKiemDP.Size = new System.Drawing.Size(95, 17);
+            this.checkboxTimKiemDP.TabIndex = 36;
+            this.checkboxTimKiemDP.Text = "Mã Đặt Phòng";
+            this.checkboxTimKiemDP.UseVisualStyleBackColor = true;
+            this.checkboxTimKiemDP.CheckedChanged += new System.EventHandler(this.checkboxTimKiemDP_CheckedChanged);
+            // 
             // HoaDonUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 489);
+            this.Controls.Add(this.checkboxTimKiemDP);
             this.Controls.Add(this.txtTenLoaiPhong);
             this.Controls.Add(this.txtTenKH);
             this.Controls.Add(this.txtTenKS);
@@ -270,9 +279,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateNgayThanhToan);
             this.Controls.Add(this.btnTimDP);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtMaDP);
-            this.Controls.Add(this.btnXuatHoaDon);
+            this.Controls.Add(this.btnSaveHoaDon);
             this.Controls.Add(this.gridviewDatPhong);
             this.Name = "HoaDonUI";
             this.Text = "HoaDonUI";
@@ -286,9 +294,8 @@
         #endregion
 
         private System.Windows.Forms.DataGridView gridviewDatPhong;
-        private System.Windows.Forms.Button btnXuatHoaDon;
+        private System.Windows.Forms.Button btnSaveHoaDon;
         private System.Windows.Forms.TextBox txtMaDP;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnTimDP;
         private System.Windows.Forms.DateTimePicker dateNgayThanhToan;
         private System.Windows.Forms.Label label2;
@@ -308,5 +315,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox checkboxTimKiemDP;
     }
 }

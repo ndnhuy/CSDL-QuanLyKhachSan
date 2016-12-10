@@ -1,6 +1,8 @@
 ﻿
 
 -- KHÁCH HÀNG TABLE
+if object_id('HoaDon', 'U') is not null
+drop table HoaDon;
 if object_id('DatPhong', 'U') is not null
 drop table DatPhong;
 if object_id('TrangThaiPhong', 'U') is not null
@@ -208,6 +210,29 @@ as
 		@donGia,
 		@moTa,
 		@tinhTrang
+	)
+
+go
+
+-- Lập hóa đơn
+if object_id('sp_lapHoaDon') is not null
+	drop procedure sp_lapHoaDon;
+go
+
+	create procedure sp_lapHoaDon
+		@ngayThanhToan date,
+		@tongTien bigint, 
+		@maDP int
+as
+	insert into HoaDon(	
+							ngayThanhToan,
+							tongTien,
+							maDP
+						) 
+	values (
+		@ngayThanhToan,
+		@tongTien,
+		@maDP
 	)
 
 go

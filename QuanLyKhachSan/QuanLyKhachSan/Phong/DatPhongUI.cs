@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyKhachSan.HoaDon;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -52,7 +53,6 @@ namespace QuanLyKhachSan.Phong
         private void DatPhongUI_Load(object sender, EventArgs e)
         {
             comboboxTinhTrang.SelectedIndex = 0;
-            // Bind events
             gridviewPhong.SelectionChanged += GridviewPhong_SelectionChanged;
 
             gridviewPhong.DataSource = phongBindingSource;
@@ -87,6 +87,14 @@ namespace QuanLyKhachSan.Phong
             datphong.MaKH = 1;
 
             datphongDAO.datPhong(datphong);
+
+            MessageBox.Show("Đặt phòng thành công.");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new HoaDonUI().Show();
+            Hide();
         }
     }
 }
