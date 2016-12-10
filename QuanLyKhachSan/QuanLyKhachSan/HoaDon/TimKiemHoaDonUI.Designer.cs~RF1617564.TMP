@@ -159,7 +159,6 @@
             // 
             // dateNgayDat
             // 
-            this.dateNgayDat.Enabled = false;
             this.dateNgayDat.Location = new System.Drawing.Point(534, 179);
             this.dateNgayDat.Name = "dateNgayDat";
             this.dateNgayDat.Size = new System.Drawing.Size(269, 20);
@@ -167,7 +166,6 @@
             // 
             // dateTraPhong
             // 
-            this.dateTraPhong.Enabled = false;
             this.dateTraPhong.Location = new System.Drawing.Point(534, 153);
             this.dateTraPhong.Name = "dateTraPhong";
             this.dateTraPhong.Size = new System.Drawing.Size(269, 20);
@@ -175,7 +173,6 @@
             // 
             // dateBatDau
             // 
-            this.dateBatDau.Enabled = false;
             this.dateBatDau.Location = new System.Drawing.Point(534, 128);
             this.dateBatDau.Name = "dateBatDau";
             this.dateBatDau.Size = new System.Drawing.Size(269, 20);
@@ -272,7 +269,6 @@
             // 
             // dateNgayThanhToan
             // 
-            this.dateNgayThanhToan.Enabled = false;
             this.dateNgayThanhToan.Location = new System.Drawing.Point(130, 232);
             this.dateNgayThanhToan.Name = "dateNgayThanhToan";
             this.dateNgayThanhToan.Size = new System.Drawing.Size(269, 20);

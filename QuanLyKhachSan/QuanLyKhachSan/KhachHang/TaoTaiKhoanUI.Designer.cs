@@ -209,6 +209,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TaoTaiKhoanUI";
             this.Text = "Đăng Kí";
+            this.Load += new System.EventHandler(this.TaoTaiKhoanUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

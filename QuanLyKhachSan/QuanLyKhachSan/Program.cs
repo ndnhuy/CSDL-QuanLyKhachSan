@@ -68,7 +68,7 @@ namespace QuanLyKhachSan
            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TimKiemHoaDonUI());
+            Application.Run(new DangNhapUI());
         }
     }
 }

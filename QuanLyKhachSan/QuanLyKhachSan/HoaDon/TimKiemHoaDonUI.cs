@@ -45,6 +45,88 @@ namespace QuanLyKhachSan.HoaDon
         private void TimKiemHoaDon_Load(object sender, EventArgs e)
         {
             gridviewHoaDon.DataSource = timkiemBindingSource;
+            gridviewHoaDon.SelectionChanged += GridviewHoaDon_SelectionChanged;
+
+            textboxMaKH.KeyPress += TextboxNumberInputOnly_KeyPress;
+            textboxThanhTien.KeyPress += TextboxNumberInputOnly_KeyPress;
+
+            GetData(queryAll());
+        }
+
+        private void GridviewHoaDon_SelectionChanged(object sender, EventArgs e)
+        {
+            if (gridviewHoaDon.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+
+            int maHD = Int32.Parse(gridviewHoaDon.SelectedRows[0].Cells["maHD"].Value.ToString());
+            HoaDonDAO hoaDonDAO = new HoaDonDAO();
+            HoaDon hd = hoaDonDAO.getHoaDon(maHD);
+
+            if (hd == null)
+            {
+                MessageBox.Show("Mã đặt phòng không tồn tại");
+                return;
+            }
+
+            txtTenKS.Text = hd.TenKhachSan;
+            txtDonGia.Text = hd.DonGia.ToString();
+            txtTenLoaiPhong.Text = hd.TenLoaiPhong;
+            txtTenKH.Text = hd.TenKhachHang;
+            dateNgayDat.Text = hd.NgayDat.ToString();
+            dateBatDau.Text = hd.NgayBatDau.ToString();
+            dateTraPhong.Text = hd.NgayTraPhong.ToString();
+            dateNgayThanhToan.Text = hd.NgayThanhToan.ToString();
+            txtTongTien.Text = hd.TongTien.ToString();
+        }
+
+        private void TextboxNumberInputOnly_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            if (textboxMaKH.Text == "" 
+                || dateNgayLap.Text == "" 
+                || textboxThanhTien.Text == "")
+            {
+                MessageBox.Show("Chưa nhập đầy đủ thông tin tìm kiếm.");
+                GetData(queryAll());
+                return;
+            }
+
+            GetData(queryWith(
+                    textboxMaKH.Text,
+                    dateNgayLap.Value.ToString("yyyy-MM-dd"),
+                    textboxThanhTien.Text
+                ));
+        }
+
+        private String queryWith(String maKH, String ngayLap, String tongTien)
+        {
+            //dateNgayLap.Value.ToShortDateString()
+            Console.WriteLine(dateNgayLap.Value.ToShortDateString());
+            return String.Format("select hd.maDP, hd.maHD, hd.ngayThanhToan, hd.tongTien from HoaDon hd, DatPhong dp, KhachHang kh" +
+                            " where hd.maDP = dp.maDP" +
+                            " AND dp.maKH = kh.maKH" +
+                            " AND dp.maKH = {0}" +
+                            " AND hd.ngayThanhToan = '{1}'" +
+                            " AND hd.tongTien = {2}",
+                            maKH,
+                            ngayLap,
+                            tongTien);
+        }
+
+        private String queryAll()
+        {
+            //dateNgayLap.Value.ToShortDateString()
+            Console.WriteLine(dateNgayLap.Value.ToShortDateString());
+            return "select hd.maDP, hd.maHD, hd.ngayThanhToan, hd.tongTien from HoaDon hd, DatPhong dp, KhachHang kh" +
+                            " where hd.maDP = dp.maDP" +
+                            " AND dp.maKH = kh.maKH";
         }
     }
 }
