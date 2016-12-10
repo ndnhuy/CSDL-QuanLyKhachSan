@@ -16,7 +16,8 @@ namespace QuanLyKhachSan.KhachHang
 
         // Tên của các stored procedured
         private const String SP_THEM_KHACH_HANG = "sp_themKhachHang";
-        private const String SP_KIEM_TRA_TON_TAI = "sp_kiemtraKhachHangTonTai";
+        private const String SP_DANG_NHAP = "sp_dangNhap";
+        private const String SP_KIEM_TRA_TEN_DANG_NHAP = "sp_kiemTraTenDangNhap";
         private const String TABLE_NAME_KHACHHANG = "KhachHang";
 
         public KhachHang getKhachHang(string tenDangNhap)
@@ -108,10 +109,41 @@ namespace QuanLyKhachSan.KhachHang
             {
                 conn.Open();
 
-                SqlCommand command = new SqlCommand(SP_KIEM_TRA_TON_TAI, conn);
+                SqlCommand command = new SqlCommand(SP_DANG_NHAP, conn);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("@tenDangNhap", SqlDbType.NVarChar).Value = tenDangNhap;
                 command.Parameters.Add("@matKhau", SqlDbType.NVarChar).Value = matKhau;
+                SqlParameter maKH = command.Parameters.Add("@maKH", SqlDbType.Int);
+                maKH.Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+
+                return maKH.Value != DBNull.Value;
+            }
+            catch (SqlException ex)
+            {
+                throw new ThemKhachHangException(ex.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public bool exist(String tenDangNhap)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            try
+            {
+                conn.Open();
+
+                SqlCommand command = new SqlCommand(SP_KIEM_TRA_TEN_DANG_NHAP, conn);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@tenDangNhap", SqlDbType.NVarChar).Value = tenDangNhap;
                 SqlParameter maKH = command.Parameters.Add("@maKH", SqlDbType.Int);
                 maKH.Direction = ParameterDirection.Output;
 

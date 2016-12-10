@@ -75,7 +75,12 @@ namespace QuanLyKhachSan.HoaDon
             dateNgayDat.Text = gridviewDatPhong.SelectedRows[0].Cells["ngayDat"].Value.ToString();
             dateTraPhong.Text = gridviewDatPhong.SelectedRows[0].Cells["ngayTraPhong"].Value.ToString();
             dateNgayThanhToan.Text = DateTime.Now.ToString();
-            txtTongTien.Text = ( (dateTraPhong.Value - dateBatDau.Value).Days * Int32.Parse(txtDonGia.Text.ToString()) ).ToString();
+
+            int dongia;
+            if (Int32.TryParse(gridviewDatPhong.SelectedRows[0].Cells["donGia"].Value.ToString(), out dongia))
+            {
+                txtTongTien.Text = ((dateTraPhong.Value - dateBatDau.Value).Days * dongia).ToString();
+            }
         }
 
         private void btnTimDP_Click(object sender, EventArgs e)
@@ -120,6 +125,11 @@ namespace QuanLyKhachSan.HoaDon
             }
             hoaDonDAO.saveHoaDon(dateNgayThanhToan.Value, Int64.Parse(txtTongTien.Text), Int32.Parse(txtMaDP.Text));
             MessageBox.Show("Lưu hóa đơn thành công");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new TimKiemHoaDonUI().Show();
         }
     }
 }

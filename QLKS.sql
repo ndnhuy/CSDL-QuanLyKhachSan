@@ -159,12 +159,12 @@ as
 
 go
 
--- Kiểm tra khách hàng có tồn tại hay không
-if object_id('sp_kiemtraKhachHangTonTai') is not null
-	drop procedure sp_kiemtraKhachHangTonTai;
+-- Kiểm tra tên đăng nhập và mật khẩu
+if object_id('sp_dangNhap') is not null
+	drop procedure sp_dangNhap;
 go
 
-	create procedure sp_kiemtraKhachHangTonTai
+	create procedure sp_dangNhap
 		@maKH int output,
 		@tenDangNhap nvarchar(30),
 		@matKhau nvarchar(30)
@@ -174,6 +174,23 @@ as
 	select @maKH = kh.maKH 
 	from KhachHang kh
 	where kh.tenDangNhap = @tenDangNhap AND kh.matKhau = @matKhau
+
+go
+
+-- Kiểm tra tên đăng nhập đã tồn tại chưa
+if object_id('sp_kiemTraTenDangNhap') is not null
+	drop procedure sp_kiemTraTenDangNhap;
+go
+
+	create procedure sp_kiemTraTenDangNhap
+		@maKH int output,
+		@tenDangNhap nvarchar(30)
+
+as
+
+	select @maKH = kh.maKH 
+	from KhachHang kh
+	where kh.tenDangNhap = @tenDangNhap
 
 go
 -- Đặt phòng

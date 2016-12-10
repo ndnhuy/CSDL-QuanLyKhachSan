@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyKhachSan.KhachHang;
 
 namespace QuanLyKhachSan.Phong
 {
@@ -18,15 +19,17 @@ namespace QuanLyKhachSan.Phong
         private BindingSource phongBindingSource = new BindingSource();
         private SqlDataAdapter dataAdapter = new SqlDataAdapter();
         private int maKS;
+        private KhachHang.KhachHang khachHang = null;
         private DatPhongDAO datphongDAO = new DatPhongDAO();
         public DatPhongUI()
         {
             InitializeComponent();
         }
-        public DatPhongUI(int maKS)
+        public DatPhongUI(int maKS, KhachHang.KhachHang kh)
         {
             InitializeComponent();
             this.maKS = maKS;
+            this.khachHang = kh;
         }
 
         private void GetData(string selectCommand)
@@ -54,6 +57,8 @@ namespace QuanLyKhachSan.Phong
         {
             comboboxTinhTrang.SelectedIndex = 0;
             gridviewPhong.SelectionChanged += GridviewPhong_SelectionChanged;
+
+            txtTenKH.Text = khachHang.HoTen;
 
             gridviewPhong.DataSource = phongBindingSource;
             GetData("select lp.maLoaiPhong, lp.tenLoaiPhong, ks.tenKS, lp.donGia from KhachSan ks, LoaiPhong lp" +
@@ -84,7 +89,7 @@ namespace QuanLyKhachSan.Phong
             datphong.DonGia = (int)gridviewPhong.SelectedRows[0].Cells["donGia"].Value;
             datphong.MoTa = txtMoTa.Text;
             datphong.TinhTrang = comboboxTinhTrang.SelectedItem.ToString();
-            datphong.MaKH = 1;
+            datphong.MaKH = khachHang.MaKH;
 
             datphongDAO.datPhong(datphong);
 

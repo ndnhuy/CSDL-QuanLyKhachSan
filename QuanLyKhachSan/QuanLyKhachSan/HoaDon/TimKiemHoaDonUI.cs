@@ -55,7 +55,7 @@ namespace QuanLyKhachSan.HoaDon
 
         private void GridviewHoaDon_SelectionChanged(object sender, EventArgs e)
         {
-            if (gridviewHoaDon.SelectedRows.Count == 0)
+            if (gridviewHoaDon.SelectedRows.Count == 0 || gridviewHoaDon.SelectedRows[0].Cells.Count == 0)
             {
                 return;
             }

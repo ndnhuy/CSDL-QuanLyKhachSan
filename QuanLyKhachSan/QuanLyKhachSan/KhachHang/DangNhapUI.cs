@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyKhachSan.KhachSan;
+using QuanLyKhachSan.Phong;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +22,12 @@ namespace QuanLyKhachSan.KhachHang
 
         private void buttonDangNhap_Click(object sender, EventArgs e)
         {
+            if (textBoxTenDangNhap.Text == "" || textBoxMatKhau.Text == "")
+            {
+                MessageBox.Show("Chưa nhập đầy đủ thông tin");
+                return;
+            }
+
             if (!khachHangDAO.exist(textBoxTenDangNhap.Text, textBoxMatKhau.Text))
             {
                 MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng.");
@@ -30,6 +38,9 @@ namespace QuanLyKhachSan.KhachHang
             MessageBox.Show(String.Format("Chào mừng khách hàng {0} với mã số {1}",
                                           kh.HoTen,
                                           kh.MaKH));
+
+            new ThongTinKhachSanUI(kh).Show();
+            Hide();
 
         }
 

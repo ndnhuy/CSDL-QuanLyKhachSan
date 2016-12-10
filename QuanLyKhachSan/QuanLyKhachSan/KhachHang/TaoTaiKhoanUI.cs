@@ -68,6 +68,12 @@ namespace QuanLyKhachSan
                 return;
             }
 
+            if (new KhachHangDAO().exist(textBoxTenDangNhap.Text))
+            {
+                MessageBox.Show("Tên đăng nhập này đã tồn tại.");
+                return;
+            }
+
             KhachHang.KhachHang khachHang = new KhachHang.KhachHang();
             khachHang.HoTen = textBoxHoTen.Text;
             khachHang.TenDangNhap = textBoxTenDangNhap.Text;

@@ -12,3 +12,4 @@ D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.Phong.DatPhongUI.resources
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.HoaDon.HoaDonUI.resources
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.HoaDon.TimKiemHoaDonUI.resources
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.HomeUI.resources

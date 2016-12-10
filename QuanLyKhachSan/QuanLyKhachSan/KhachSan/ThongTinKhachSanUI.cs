@@ -17,11 +17,12 @@ namespace QuanLyKhachSan.KhachSan
     {
         private BindingSource khachsanBindingSource = new BindingSource();
         private SqlDataAdapter dataAdapter = new SqlDataAdapter();
+        QuanLyKhachSan.KhachHang.KhachHang khachHang = null;
 
-        public ThongTinKhachSanUI()
+        public ThongTinKhachSanUI(QuanLyKhachSan.KhachHang.KhachHang kh)
         {
             InitializeComponent();
-            
+            this.khachHang = kh;
 
             // Người dùng chỉ được nhập số vào ô giá cả
             this.txtFrom.KeyPress += new KeyPressEventHandler(GiaTextBox_KeyPress);
@@ -139,7 +140,7 @@ namespace QuanLyKhachSan.KhachSan
         private void btnDatPhong_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value.ToString());
-            new DatPhongUI((int)gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value).Show();
+            new DatPhongUI((int)gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value, khachHang).Show();
             Hide();
         }
     }

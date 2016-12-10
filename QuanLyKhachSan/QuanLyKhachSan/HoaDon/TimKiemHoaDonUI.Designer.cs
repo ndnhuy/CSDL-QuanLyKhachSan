@@ -109,6 +109,7 @@
             // 
             this.gridviewHoaDon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridviewHoaDon.Location = new System.Drawing.Point(12, 308);
+            this.gridviewHoaDon.MultiSelect = false;
             this.gridviewHoaDon.Name = "gridviewHoaDon";
             this.gridviewHoaDon.ReadOnly = true;
             this.gridviewHoaDon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
