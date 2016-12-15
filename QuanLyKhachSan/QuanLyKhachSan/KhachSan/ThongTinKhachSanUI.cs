@@ -143,5 +143,10 @@ namespace QuanLyKhachSan.KhachSan
             new DatPhongUI((int)gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value, khachHang).Show();
             Hide();
         }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            GetData(getQuery());
+        }
     }
 }

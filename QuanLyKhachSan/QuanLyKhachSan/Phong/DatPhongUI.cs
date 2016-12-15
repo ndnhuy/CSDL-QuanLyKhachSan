@@ -21,6 +21,10 @@ namespace QuanLyKhachSan.Phong
         private int maKS;
         private KhachHang.KhachHang khachHang = null;
         private DatPhongDAO datphongDAO = new DatPhongDAO();
+
+        private const String SELECT_ALL_LOAIPHONG_KHACHSAN = "select lp.maLoaiPhong, lp.tenLoaiPhong, ks.tenKS, lp.donGia, lp.slTrong from KhachSan ks, LoaiPhong lp" +
+                                                            " where ks.maKS = lp.maKS";
+
         public DatPhongUI()
         {
             InitializeComponent();
@@ -61,13 +65,16 @@ namespace QuanLyKhachSan.Phong
             txtTenKH.Text = khachHang.HoTen;
 
             gridviewPhong.DataSource = phongBindingSource;
-            GetData("select lp.maLoaiPhong, lp.tenLoaiPhong, ks.tenKS, lp.donGia from KhachSan ks, LoaiPhong lp" +
-                   " where ks.maKS = lp.maKS");
+            GetData(SELECT_ALL_LOAIPHONG_KHACHSAN);
         }
+
 
         private void GridviewPhong_SelectionChanged(object sender, EventArgs e)
         {
-            //gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value.ToString()
+            if (gridviewPhong.SelectedRows.Count == 0)
+            {
+                return;
+            }
             txtTenKS.Text = gridviewPhong.SelectedRows[0].Cells["tenKS"].Value.ToString();
             txtDonGia.Text = gridviewPhong.SelectedRows[0].Cells["donGia"].Value.ToString();
             txtTenLoaiPhong.Text = gridviewPhong.SelectedRows[0].Cells["tenLoaiPhong"].Value.ToString();
@@ -91,15 +98,25 @@ namespace QuanLyKhachSan.Phong
             datphong.TinhTrang = comboboxTinhTrang.SelectedItem.ToString();
             datphong.MaKH = khachHang.MaKH;
 
+
+            int maPhongTrong = datphongDAO.pickAnyAvailableRoom(datphong.MaLoaiPhong, datphong.NgayBatDau);
+            if (maPhongTrong == -1) 
+            {
+                // Không còn phòng trống
+                MessageBox.Show("Không còn phòng trống");
+                return;
+            }
+
+            // Đặt phòng
+            // Giảm số lượng trống của loại phòng tương ứng
+            // Update hoặc create trạng thái mới "đang sử dụng" cho phòng tương ứng
             datphongDAO.datPhong(datphong);
+            datphongDAO.decreaseNumberOfAvailableRooms(datphong.MaLoaiPhong);
+            datphongDAO.updateTrangThaiPhong(maPhongTrong, datphong.NgayBatDau, "đang sử dụng");
 
             MessageBox.Show("Đặt phòng thành công.");
+            GetData(SELECT_ALL_LOAIPHONG_KHACHSAN);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new HoaDonUI().Show();
-            Hide();
-        }
     }
 }

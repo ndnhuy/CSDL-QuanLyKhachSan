@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(243, 89);
+            this.ClientSize = new System.Drawing.Size(247, 95);
             this.Controls.Add(this.btnDangNhap);
             this.Controls.Add(this.btnHoaDon);
             this.Name = "HomeUI";

@@ -108,7 +108,6 @@ namespace QuanLyKhachSan.HoaDon
         private String queryWith(String maKH, String ngayLap, String tongTien)
         {
             //dateNgayLap.Value.ToShortDateString()
-            Console.WriteLine(dateNgayLap.Value.ToShortDateString());
             return String.Format("select hd.maDP, hd.maHD, hd.ngayThanhToan, hd.tongTien from HoaDon hd, DatPhong dp, KhachHang kh" +
                             " where hd.maDP = dp.maDP" +
                             " AND dp.maKH = kh.maKH" +

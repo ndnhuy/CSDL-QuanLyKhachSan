@@ -1,4 +1,32 @@
-﻿-- insert data
+﻿use QuanLyKhachSan
+go
+-- insert data
+USE [QuanLyKhachSan]
+GO
+
+INSERT INTO [dbo].[KhachHang]
+           ([hoTen]
+           ,[tenDangNhap]
+           ,[matKhau]
+           ,[soCMND]
+           ,[diaChi]
+           ,[soDienThoai]
+           ,[moTa]
+           ,[email])
+     VALUES
+           (N'Nhật Huy'
+           ,'admin'
+           ,'admin'
+           ,'123456789'
+           ,''
+           ,''
+           ,''
+           ,'')
+GO
+
+
+
+
 INSERT INTO [dbo].[KhachSan]
            ([tenKS]
            ,[soSao]
@@ -111,57 +139,57 @@ INSERT INTO [dbo].[Phong]
            ,5)
 GO
 
-USE [QuanLyKhachSan]
-GO
+--USE [QuanLyKhachSan]
+--GO
 
-INSERT INTO [dbo].[TrangThaiPhong]
-           ([maPhong]
-		   ,[ngay]
-           ,[tinhTrang])
-     VALUES
-           (1
-		   ,GETDATE(),
-           N'Còn trống')
-GO
+--INSERT INTO [dbo].[TrangThaiPhong]
+--           ([maPhong]
+--		   ,[ngay]
+--           ,[tinhTrang])
+--     VALUES
+--           (1
+--		   ,GETDATE(),
+--           N'Còn trống')
+--GO
 
-INSERT INTO [dbo].[TrangThaiPhong]
-           ([maPhong]
-		   ,[ngay]
-           ,[tinhTrang])
-     VALUES
-           (2
-		   ,GETDATE(),
-           N'Còn trống')
-GO
+--INSERT INTO [dbo].[TrangThaiPhong]
+--           ([maPhong]
+--		   ,[ngay]
+--           ,[tinhTrang])
+--     VALUES
+--           (2
+--		   ,GETDATE(),
+--           N'Còn trống')
+--GO
 
-INSERT INTO [dbo].[TrangThaiPhong]
-           ([maPhong]
-		   ,[ngay]
-           ,[tinhTrang])
-     VALUES
-           (3
-		   ,GETDATE(),
-           N'Còn trống')
-GO
+--INSERT INTO [dbo].[TrangThaiPhong]
+--           ([maPhong]
+--		   ,[ngay]
+--           ,[tinhTrang])
+--     VALUES
+--           (3
+--		   ,GETDATE(),
+--           N'Còn trống')
+--GO
 
-INSERT INTO [dbo].[TrangThaiPhong]
-           ([maPhong]
-		   ,[ngay]
-           ,[tinhTrang])
-     VALUES
-           (4
-		   ,GETDATE(),
-           N'Còn trống')
-GO
+--INSERT INTO [dbo].[TrangThaiPhong]
+--           ([maPhong]
+--		   ,[ngay]
+--           ,[tinhTrang])
+--     VALUES
+--           (4
+--		   ,GETDATE(),
+--           N'Còn trống')
+--GO
 
-INSERT INTO [dbo].[TrangThaiPhong]
-           ([maPhong]
-		   ,[ngay]
-           ,[tinhTrang])
-     VALUES
-           (5
-		   ,GETDATE(),
-           N'Còn trống')
+--INSERT INTO [dbo].[TrangThaiPhong]
+--           ([maPhong]
+--		   ,[ngay]
+--           ,[tinhTrang])
+--     VALUES
+--           (5
+--		   ,GETDATE(),
+--           N'Còn trống')
 GO
 
 -- INSERT KHÁCH HÀNG

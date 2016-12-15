@@ -40,6 +40,7 @@
             this.checkboxGiaTB = new System.Windows.Forms.CheckBox();
             this.checkboxHangSao = new System.Windows.Forms.CheckBox();
             this.btnDatPhong = new System.Windows.Forms.Button();
+            this.btnReload = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridviewKhachSan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -166,11 +167,22 @@
             this.btnDatPhong.UseVisualStyleBackColor = true;
             this.btnDatPhong.Click += new System.EventHandler(this.btnDatPhong_Click);
             // 
+            // btnReload
+            // 
+            this.btnReload.Location = new System.Drawing.Point(718, 148);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(75, 23);
+            this.btnReload.TabIndex = 14;
+            this.btnReload.Text = "Reload";
+            this.btnReload.UseVisualStyleBackColor = true;
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
+            // 
             // ThongTinKhachSanUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 352);
+            this.Controls.Add(this.btnReload);
             this.Controls.Add(this.btnDatPhong);
             this.Controls.Add(this.checkboxHangSao);
             this.Controls.Add(this.checkboxGiaTB);
@@ -206,5 +218,6 @@
         private System.Windows.Forms.CheckBox checkboxGiaTB;
         private System.Windows.Forms.CheckBox checkboxHangSao;
         private System.Windows.Forms.Button btnDatPhong;
+        private System.Windows.Forms.Button btnReload;
     }
 }

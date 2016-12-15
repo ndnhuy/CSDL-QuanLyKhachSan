@@ -1,5 +1,6 @@
 ﻿
-
+use QuanLyKhachSan
+go
 -- KHÁCH HÀNG TABLE
 if object_id('HoaDon', 'U') is not null
 drop table HoaDon;
@@ -78,11 +79,13 @@ if object_id('TrangThaiPhong', 'U') is not null
 drop table TrangThaiPhong;
 
 create table TrangThaiPhong (
-	maPhong int PRIMARY KEY,
+	maPhong int,
 	ngay date NOT NULL,
-	tinhTrang nvarchar(30) NOT NULL
+	tinhTrang nvarchar(30) NOT NULL,
+	constraint pk_TrangThaiPhongID primary key (maPhong, ngay)
 )
-alter table TrangThaiPhong 
+
+alter table TrangThaiPhong
 add constraint FK_TrangThaiPhong_Phong foreign key (maPhong) 
 references Phong (maPhong);
 
@@ -255,3 +258,23 @@ as
 go
 
 -- TRIGGERS
+
+-- Lúc insert 1 phòng thì số lượng phòng trống của loại phòng tương ứng tăng thêm 1 và 
+-- trạng thái phòng "còn trống" được tạo ra
+create trigger insert_phong on Phong
+for insert
+as 
+begin
+	set nocount on;
+
+	declare @maLoaiPhong INT, @maPhong INT
+	select @maLoaiPhong = inserted.loaiPhong, @maPhong = inserted.maPhong
+	from inserted
+
+	update LoaiPhong
+	set slTrong = slTrong + 1
+	where maLoaiPhong = @maLoaiPhong;
+
+	insert into TrangThaiPhong(maPhong, ngay, tinhTrang) values(@maPhong, GETDATE(), N'còn trống')
+
+end
