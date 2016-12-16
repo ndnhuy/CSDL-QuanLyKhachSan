@@ -22,8 +22,11 @@ namespace QuanLyKhachSan.Phong
         private KhachHang.KhachHang khachHang = null;
         private DatPhongDAO datphongDAO = new DatPhongDAO();
 
-        private const String SELECT_ALL_LOAIPHONG_KHACHSAN = "select lp.maLoaiPhong, lp.tenLoaiPhong, ks.tenKS, lp.donGia, lp.slTrong from KhachSan ks, LoaiPhong lp" +
-                                                            " where ks.maKS = lp.maKS";
+        private const String SELECT_ALL_LOAIPHONG_KHACHSAN = @"select lp.maLoaiPhong, lp.tenLoaiPhong, ks.tenKS, lp.donGia
+                                                               from LoaiPhong lp
+                                                               inner join KhachSan ks
+                                                               on ks.maKS = lp.maKS
+                                                               where ks.maKS = {0}";
 
         public DatPhongUI()
         {
@@ -59,15 +62,31 @@ namespace QuanLyKhachSan.Phong
 
         private void DatPhongUI_Load(object sender, EventArgs e)
         {
+            // DateTimePicker events
+            dateNgayDat.Value = DateTime.Now;
+            dateBatDau.MinDate = DateTime.Now;
+            dateBatDau.ValueChanged += DateBatDau_ValueChanged;
+
             comboboxTinhTrang.SelectedIndex = 0;
             gridviewPhong.SelectionChanged += GridviewPhong_SelectionChanged;
 
             txtTenKH.Text = khachHang.HoTen;
 
             gridviewPhong.DataSource = phongBindingSource;
-            GetData(SELECT_ALL_LOAIPHONG_KHACHSAN);
+            GetData(String.Format(SELECT_ALL_LOAIPHONG_KHACHSAN, maKS));
         }
 
+        private void DateBatDau_ValueChanged(object sender, EventArgs e)
+        {
+            DateTimePicker datetime = (DateTimePicker)sender;
+            // if pickanydate return -1, then show error
+            int maLoaiPhong = (int)gridviewPhong.SelectedRows[0].Cells["maLoaiPhong"].Value;
+            //if (datphongDAO.pickAnyAvailableRoom(maLoaiPhong, datetime.Value) == -1)
+            //{
+            //    MessageBox.Show("Ngày bắt đầu không hợp lệ vì không còn phòng trống");
+            //    datetime.Value = DateTime.Now;
+            //}
+        }
 
         private void GridviewPhong_SelectionChanged(object sender, EventArgs e)
         {
@@ -75,6 +94,7 @@ namespace QuanLyKhachSan.Phong
             {
                 return;
             }
+
             txtTenKS.Text = gridviewPhong.SelectedRows[0].Cells["tenKS"].Value.ToString();
             txtDonGia.Text = gridviewPhong.SelectedRows[0].Cells["donGia"].Value.ToString();
             txtTenLoaiPhong.Text = gridviewPhong.SelectedRows[0].Cells["tenLoaiPhong"].Value.ToString();
@@ -98,8 +118,13 @@ namespace QuanLyKhachSan.Phong
             datphong.TinhTrang = comboboxTinhTrang.SelectedItem.ToString();
             datphong.MaKH = khachHang.MaKH;
 
+            if (datphong.NgayTraPhong <= datphong.NgayBatDau)
+            {
+                MessageBox.Show("Ngày trả phòng phải sau ngày bắt đầu");
+                return;
+            }
 
-            int maPhongTrong = datphongDAO.pickAnyAvailableRoom(datphong.MaLoaiPhong, datphong.NgayBatDau);
+            int maPhongTrong = datphongDAO.pickAnyAvailableRoom(datphong.MaLoaiPhong, datphong.NgayBatDau, datphong.NgayTraPhong);
             if (maPhongTrong == -1) 
             {
                 // Không còn phòng trống
@@ -108,15 +133,45 @@ namespace QuanLyKhachSan.Phong
             }
 
             // Đặt phòng
-            // Giảm số lượng trống của loại phòng tương ứng
-            // Update hoặc create trạng thái mới "đang sử dụng" cho phòng tương ứng
+            // Update hoặc create trạng thái mới "đang sử dụng" cho phòng tương ứng trong các ngày từ ngayBatDau -> ngayTraPhong
             datphongDAO.datPhong(datphong);
-            datphongDAO.decreaseNumberOfAvailableRooms(datphong.MaLoaiPhong);
-            datphongDAO.updateTrangThaiPhong(maPhongTrong, datphong.NgayBatDau, "đang sử dụng");
+            DateTime ngay = datphong.NgayBatDau;
+            for (; ngay < datphong.NgayTraPhong; ngay = ngay.AddDays(1))
+            {
+                datphongDAO.updateTrangThaiPhong(maPhongTrong, ngay, "đang sử dụng");
+            }
 
             MessageBox.Show("Đặt phòng thành công.");
-            GetData(SELECT_ALL_LOAIPHONG_KHACHSAN);
+            GetData(dataAdapter.SelectCommand.CommandText);
         }
 
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            if (dateTraPhong.Value <= dateBatDau.Value)
+            {
+                MessageBox.Show("Ngày trả phòng phải sau ngày bắt đầu");
+                return;
+            }
+
+            String query = @"select LoaiPhong.maLoaiPhong, LoaiPhong.tenLoaiPhong, KhachSan.tenKS, LoaiPhong.donGia 
+                            from LoaiPhong
+                            inner join KhachSan
+                            on LoaiPhong.maKS = KhachSan.maKS
+                            where KhachSan.maKS = {0}
+                            and exists (select maPhong from Phong
+			                            where Phong.loaiPhong = LoaiPhong.maLoaiPhong 
+			                            and maPhong not in (select maPhong from TrangThaiPhong
+									                        where TrangThaiPhong.maPhong = maPhong
+									                                and TrangThaiPhong.ngay >= '{1}'
+									                                and TrangThaiPhong.ngay < '{2}'
+									                                and TrangThaiPhong.tinhTrang = N'đang sử dụng'))";
+
+
+            GetData(String.Format(query, 
+                                  maKS,
+                                  dateBatDau.Value.ToString("yyyy-MM-dd"), 
+                                  dateTraPhong.Value.ToString("yyyy-MM-dd"))
+                   );
+        }
     }
 }

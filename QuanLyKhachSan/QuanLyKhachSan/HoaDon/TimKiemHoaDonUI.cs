@@ -61,7 +61,12 @@ namespace QuanLyKhachSan.HoaDon
             }
 
 
-            int maHD = Int32.Parse(gridviewHoaDon.SelectedRows[0].Cells["maHD"].Value.ToString());
+            int maHD;
+            if (!Int32.TryParse(gridviewHoaDon.SelectedRows[0].Cells["maHD"].Value.ToString(), out maHD))
+            {
+                return;
+            }
+
             HoaDonDAO hoaDonDAO = new HoaDonDAO();
             HoaDon hd = hoaDonDAO.getHoaDon(maHD);
 

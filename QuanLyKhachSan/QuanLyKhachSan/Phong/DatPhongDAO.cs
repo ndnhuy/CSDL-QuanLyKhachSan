@@ -17,7 +17,7 @@ namespace QuanLyKhachSan.Phong
         private String connectionString = ConfigurationManager.ConnectionStrings["QuanLyKhachSan"].ConnectionString;
         private TrangThaiPhongDAO trangthaiphongDAO = new TrangThaiPhongDAO();
 
-        public int pickAnyAvailableRoom(int maLoaiPhong, DateTime ngayBatDau)
+        public int pickAnyAvailableRoom(int maLoaiPhong, DateTime ngayBatDau, DateTime ngayTraPhong)
         {
             SqlConnection conn = new SqlConnection(connectionString);
             SqlDataReader reader = null;
@@ -25,16 +25,20 @@ namespace QuanLyKhachSan.Phong
             {
                 conn.Open();
 
-                String query = "select maPhong from Phong " +
-                               "where loaiPhong = {0} " +
-                               "and maPhong not in (select maPhong from TrangThaiPhong " +
-                               "                    where [TrangThaiPhong].maPhong = maPhong " +
-                               "                    and [TrangThaiPhong].ngay = '{1}' " +
-                               "                    and [TrangThaiPhong].tinhTrang = N'đang sử dụng')";
+                String query = @"select maPhong from Phong
+			                            where Phong.loaiPhong = {0}
+			                            and maPhong not in (select maPhong from TrangThaiPhong
+									                        where TrangThaiPhong.maPhong = maPhong
+									                                and TrangThaiPhong.ngay >= '{1}'
+									                                and TrangThaiPhong.ngay < '{2}'
+									                                and TrangThaiPhong.tinhTrang = N'đang sử dụng')";
 
 
 
-                SqlCommand cmd = new SqlCommand(String.Format(query, maLoaiPhong, ngayBatDau.ToString("yyyy-MM-dd")),
+                SqlCommand cmd = new SqlCommand(String.Format(query, 
+                                                              maLoaiPhong, 
+                                                              ngayBatDau.ToString("yyyy-MM-dd"), 
+                                                              ngayTraPhong.ToString("yyyy-MM-dd")),
                                                 conn);
 
                 reader = cmd.ExecuteReader();
@@ -104,68 +108,6 @@ namespace QuanLyKhachSan.Phong
                 }
             }
 
-        }
-
-        public bool hasAtLeastOneAvailableRoom(int maLoaiPhong)
-        {
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlDataReader reader = null;
-            try
-            {
-                conn.Open();
-
-                String query = "select slTrong from LoaiPhong where maLoaiPhong = " + maLoaiPhong;
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    return ((int)reader["slTrong"]) > 0;
-                }
-
-                return false;
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine("Có lỗi xảy ra khi kiếm tra phòng trống cho loại phòng");
-                throw ex;
-            }
-            finally
-            {
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-            }
-        }
-        public void decreaseNumberOfAvailableRooms(int maLoaiPhong)
-        {
-            SqlConnection conn = new SqlConnection(connectionString);
-
-            try
-            {
-                conn.Open();
-
-                String query = "update LoaiPhong set slTrong = slTrong - 1 where maLoaiPhong = " + maLoaiPhong;
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine("Có lỗi xảy ra khi giảm số lượng trống của loại phòng");
-                throw ex;
-            }
-            finally
-            {
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
         }
 
         public void datPhong(ThongTinDatPhong datphong)
