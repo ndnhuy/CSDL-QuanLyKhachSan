@@ -123,7 +123,7 @@
             this.txtThanhPho.Name = "txtThanhPho";
             this.txtThanhPho.Size = new System.Drawing.Size(100, 20);
             this.txtThanhPho.TabIndex = 9;
-            this.txtThanhPho.Text = "Hồ Chí Minh";
+            this.txtThanhPho.Text = "TPHCM";
             // 
             // btnTimKiem
             // 

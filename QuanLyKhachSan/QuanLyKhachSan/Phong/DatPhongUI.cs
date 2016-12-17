@@ -73,7 +73,7 @@ namespace QuanLyKhachSan.Phong
             txtTenKH.Text = khachHang.HoTen;
 
             gridviewPhong.DataSource = phongBindingSource;
-            GetData(String.Format(SELECT_ALL_LOAIPHONG_KHACHSAN, maKS));
+            gridviewPhong.Rows.Clear();
         }
 
         private void DateBatDau_ValueChanged(object sender, EventArgs e)
@@ -121,6 +121,7 @@ namespace QuanLyKhachSan.Phong
             if (datphong.NgayTraPhong <= datphong.NgayBatDau)
             {
                 MessageBox.Show("Ngày trả phòng phải sau ngày bắt đầu");
+                gridviewPhong.Rows.Clear();
                 return;
             }
 
@@ -141,7 +142,7 @@ namespace QuanLyKhachSan.Phong
                 datphongDAO.updateTrangThaiPhong(maPhongTrong, ngay, "đang sử dụng");
             }
 
-            MessageBox.Show("Đặt phòng thành công.");
+            MessageBox.Show(String.Format("Quý khách đã đặt phòng thành công (Mã phòng: {0})", maPhongTrong));
             GetData(dataAdapter.SelectCommand.CommandText);
         }
 
@@ -172,6 +173,11 @@ namespace QuanLyKhachSan.Phong
                                   dateBatDau.Value.ToString("yyyy-MM-dd"), 
                                   dateTraPhong.Value.ToString("yyyy-MM-dd"))
                    );
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

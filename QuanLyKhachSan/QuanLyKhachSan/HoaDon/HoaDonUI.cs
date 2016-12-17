@@ -66,6 +66,11 @@ namespace QuanLyKhachSan.HoaDon
 
         private void GridviewDatPhong_SelectionChanged(object sender, EventArgs e)
         {
+            if (gridviewDatPhong.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
             txtMaDP.Text = gridviewDatPhong.SelectedRows[0].Cells["maDP"].Value.ToString();
             txtTenKS.Text = gridviewDatPhong.SelectedRows[0].Cells["tenKS"].Value.ToString();
             txtDonGia.Text = gridviewDatPhong.SelectedRows[0].Cells["donGia"].Value.ToString();
@@ -130,6 +135,11 @@ namespace QuanLyKhachSan.HoaDon
         private void button1_Click(object sender, EventArgs e)
         {
             new TimKiemHoaDonUI().Show();
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            GetData(hoaDonDAO.getQueryStringOfAllDatPhong());
         }
     }
 }

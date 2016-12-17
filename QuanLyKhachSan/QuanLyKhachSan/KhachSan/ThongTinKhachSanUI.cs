@@ -78,14 +78,14 @@ namespace QuanLyKhachSan.KhachSan
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             GetData(getQuery());
-         
+            
         }
 
         string getQuery()
         {
             if (checkboxGiaTB.Checked && checkboxHangSao.Checked)
             {
-                return String.Format("select * from KhachSan where ( (giaTB > {0} AND giaTB < {1}) and (soSao = {2}) ) and thanhPho = N'{3}'",
+                return String.Format("select * from KhachSan where ( (giaTB > {0} AND giaTB < {1}) and (soSao = {2}) ) and thanhPho like N'%{3}%'",
                                     txtFrom.Text == "" ? "0" : txtFrom.Text,
                                     txtTo.Text == "" ? "0" : txtTo.Text,
                                     comboboxHangSao.SelectedItem,
@@ -95,7 +95,7 @@ namespace QuanLyKhachSan.KhachSan
 
             if (checkboxGiaTB.Checked)
             {
-                return String.Format("select * from KhachSan where (giaTB > {0} AND giaTB < {1}) AND thanhPho = N'{2}'",
+                return String.Format("select * from KhachSan where (giaTB > {0} AND giaTB < {1}) AND thanhPho like N'%{2}%'",
                                     txtFrom.Text == "" ? "0" : txtFrom.Text,
                                     txtTo.Text == "" ? "0" : txtTo.Text,
                                     txtThanhPho.Text
@@ -104,13 +104,13 @@ namespace QuanLyKhachSan.KhachSan
 
             if (checkboxHangSao.Checked)
             {
-                return String.Format("select * from KhachSan where soSao = {0} AND thanhPho = N'{1}'",
+                return String.Format("select * from KhachSan where soSao = {0} AND thanhPho like N'%{1}%'",
                                     comboboxHangSao.SelectedItem,
                                     txtThanhPho.Text
                                     );
             }
 
-            return String.Format("select * from KhachSan where thanhPho = N'{0}'",
+            return String.Format("select * from KhachSan where thanhPho like N'%{0}%'",
                                 txtThanhPho.Text
                                 );
         }
@@ -139,9 +139,13 @@ namespace QuanLyKhachSan.KhachSan
 
         private void btnDatPhong_Click(object sender, EventArgs e)
         {
+            if (gridviewKhachSan.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Chưa chọn khách sạn");
+                return;
+            }
             //MessageBox.Show(gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value.ToString());
             new DatPhongUI((int)gridviewKhachSan.SelectedRows[0].Cells["maKS"].Value, khachHang).Show();
-            Hide();
         }
 
         private void btnReload_Click(object sender, EventArgs e)

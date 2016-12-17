@@ -1,6 +1,7 @@
 ﻿
 use QuanLyKhachSan
 go
+
 -- KHÁCH HÀNG TABLE
 if object_id('HoaDon', 'U') is not null
 drop table HoaDon;
@@ -118,7 +119,7 @@ drop table HoaDon;
 create table HoaDon (
 	maHD int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	ngayThanhToan date NOT NULL,
-	tongTien bigint,
+	tongTien bigint NOT NULL,
 	maDP int 
 )
 alter table HoaDon 
@@ -257,24 +258,135 @@ as
 
 go
 
--- TRIGGERS
+-- INDEX
 
--- Lúc insert 1 phòng thì số lượng phòng trống của loại phòng tương ứng tăng thêm 1 và 
--- trạng thái phòng "còn trống" được tạo ra
-create trigger insert_phong on Phong
-for insert
-as 
-begin
-	set nocount on;
+-- index KhachHang (tenDangNhap, matKhau)
+if exists (select name from sys.indexes
+		   where name = N'IX_KhachHang_tenDangNhap_matKhau')
+	drop index IX_KhachHang_tenDangNhap_matKhau on KhachHang;
 
-	declare @maLoaiPhong INT, @maPhong INT
-	select @maLoaiPhong = inserted.loaiPhong, @maPhong = inserted.maPhong
-	from inserted
+go
 
-	update LoaiPhong
-	set slTrong = slTrong + 1
-	where maLoaiPhong = @maLoaiPhong;
+create unique index IX_KhachHang_tenDangNhap_matKhau on KhachHang (tenDangNhap, matKhau)
 
-	insert into TrangThaiPhong(maPhong, ngay, tinhTrang) values(@maPhong, GETDATE(), N'còn trống')
+go
 
-end
+-- index KhachHang (soCMND)
+if exists (select name from sys.indexes
+		   where name = N'IX_KhachHang_soCMND')
+	drop index IX_KhachHang_soCMND on KhachHang;
+
+go
+
+create index IX_KhachHang_soCMND on KhachHang (soCMND)
+
+go
+
+-- index KhachSan (soSao, thanhPho) 
+if exists (select name from sys.indexes
+		   where name = N'IX_KhachSan_soSao_thanhPho')
+	drop index IX_KhachSan_soSao_thanhPho on KhachSan;
+
+go
+
+create index IX_KhachSan_soSao_thanhPho on KhachSan (soSao, thanhPho) 
+
+go
+
+-- index KhachSan (giaTB, thanhPho)
+if exists (select name from sys.indexes
+		   where name = N'IX_KhachSan_giaTB_thanhPho')
+	drop index IX_KhachSan_giaTB_thanhPho on KhachSan;
+
+go
+
+create index IX_KhachSan_giaTB_thanhPho on KhachSan (giaTB, thanhPho)
+
+go
+
+-- index KhachSan (thanhPho)
+if exists (select name from sys.indexes
+		   where name = N'IX_KhachSan_thanhPho')
+	drop index IX_KhachSan_thanhPho on KhachSan;
+
+go
+
+create index IX_KhachSan_thanhPho on KhachSan (thanhPho)
+
+go
+-- index LoaiPhong (maKS)
+if exists (select name from sys.indexes
+		   where name = N'IX_LoaiPhong_maKS')
+	drop index IX_LoaiPhong_maKS on LoaiPhong;
+
+go
+
+create index IX_LoaiPhong_maKS on LoaiPhong (maKS)
+
+go
+
+-- index LoaiPhong (maKS, donGia)
+if exists (select name from sys.indexes
+		   where name = N'IX_LoaiPhong_maKS_donGia')
+	drop index IX_LoaiPhong_maKS_donGia on LoaiPhong;
+
+go
+
+create index IX_LoaiPhong_maKS_donGia on LoaiPhong (maKS, donGia)
+
+go
+
+-- index Phong (loaiPhong)
+if exists (select name from sys.indexes
+		   where name = N'IX_Phong_loaiPhong')
+	drop index IX_Phong_loaiPhong on Phong;
+
+go
+
+create index IX_Phong_loaiPhong on Phong (loaiPhong)
+
+go
+
+-- index TrangThaiPhong (maPhong)
+if exists (select name from sys.indexes
+		   where name = N'IX_TrangThaiPhong_maPhong')
+	drop index IX_TrangThaiPhong_maPhong on TrangThaiPhong;
+
+go
+
+create index IX_TrangThaiPhong_maPhong on TrangThaiPhong (maPhong)
+
+go
+
+-- index DatPhong (maLoaiPhong, maKH)
+if exists (select name from sys.indexes
+		   where name = N'IX_DatPhong_maLoaiPhong_maKH')
+	drop index IX_DatPhong_maLoaiPhong_maKH on DatPhong;
+
+go
+
+create index IX_DatPhong_maLoaiPhong_maKH on DatPhong (maLoaiPhong, maKH)
+
+go
+
+-- index HoaDon (maDP)
+if exists (select name from sys.indexes
+		   where name = N'IX_HoaDon_maDP')
+	drop index IX_HoaDon_maDP on HoaDon;
+
+go
+
+create index IX_HoaDon_maDP on HoaDon (maDP)
+
+go
+
+-- index HoaDon (ngayThanhToan, tongTien)
+if exists (select name from sys.indexes
+		   where name = N'IX_HoaDon_ngayThanhToan_tongTien')
+	drop index IX_HoaDon_ngayThanhToan_tongTien on HoaDon;
+
+go
+
+create index IX_HoaDon_ngayThanhToan_tongTien on HoaDon (ngayThanhToan, tongTien)
+
+go
