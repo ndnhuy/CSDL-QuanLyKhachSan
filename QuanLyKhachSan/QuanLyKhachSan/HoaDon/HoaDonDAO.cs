@@ -20,11 +20,19 @@ namespace QuanLyKhachSan.HoaDon
         // Lập hóa 
         public String getQueryStringOfAllDatPhong()
         {
-            return "select datphong.maDP, ks.tenKS, kh.hoTen, loaiphong.tenLoaiPhong, loaiphong.donGia, datphong.ngayBatDau, datphong.ngayTraPhong, datphong.ngayDat" +
-                                                 " from DatPhong datphong, LoaiPhong loaiphong, KhachSan ks, KhachHang kh where" +
-                                                 " datphong.maLoaiPhong = loaiphong.maLoaiPhong" +
-                                                 " AND datphong.maKH = kh.maKH" +
-                                                 " AND loaiphong.maKS = ks.maKS";
+            return @"select DatPhong.maDP, DatPhong.ngayBatDau, DatPhong.ngayDat, 
+		                        LoaiPhong_KhachSan.maLoaiPhong, LoaiPhong_KhachSan.tenLoaiPhong, LoaiPhong_KhachSan.donGia, LoaiPhong_KhachSan.tenKS,
+		                        KhachHang.hoTen
+                        from DatPhong
+                        inner join (
+	                                    select LoaiPhong.maLoaiPhong, LoaiPhong.tenLoaiPhong, LoaiPhong.donGia, KhachSan.tenKS
+	                                    from LoaiPhong
+	                                    inner join KhachSan
+	                                    on LoaiPhong.maKS = KhachSan.maKS
+                                    ) LoaiPhong_KhachSan
+	                        on DatPhong.maLoaiPhong = LoaiPhong_KhachSan.maLoaiPhong
+                        inner join KhachHang
+	                        on DatPhong.maKH = KhachHang.maKH";
         }
 
         public void saveHoaDon(DateTime ngayThanhToan, long tongTien, int maDP)
@@ -46,6 +54,7 @@ namespace QuanLyKhachSan.HoaDon
             catch (SqlException ex)
             {
                 Console.WriteLine("Xảy ra lỗi khi lưu hóa đơn");
+                throw ex;
             }
             finally
             {
@@ -122,12 +131,15 @@ namespace QuanLyKhachSan.HoaDon
             {
                 conn.Open();
 
-                String query = String.Format("select ks.tenKS, kh.hoTen, loaiphong.tenLoaiPhong, loaiphong.donGia, datphong.ngayBatDau, datphong.ngayTraPhong, datphong.ngayDat" + 
-                                                 " from DatPhong datphong, LoaiPhong loaiphong, KhachSan ks, KhachHang kh where" +
-                                                 " datphong.maLoaiPhong = loaiphong.maLoaiPhong" +
-                                                 " AND datphong.maKH = kh.maKH" +
-                                                 " AND loaiphong.maKS = ks.maKS" +
-                                                 " AND datphong.maDP = {0}",
+                String query = String.Format(@"select DatPhong.maDP, DatPhong.ngayBatDau, DatPhong.ngayDat, DatPhong.ngayTraPhong,
+		                                            LoaiPhong.maLoaiPhong, LoaiPhong.tenLoaiPhong, LoaiPhong.donGia,
+		                                            KhachSan.tenKS,
+		                                            KhachHang.hoTen
+                                            from DatPhong, KhachSan, KhachHang, LoaiPhong
+                                            where DatPhong.maLoaiPhong = LoaiPhong.maLoaiPhong
+                                            AND DatPhong.maKH = KhachHang.maKH
+                                            AND LoaiPhong.maKS = KhachSan.maKS
+                                            AND DatPhong.maDP = {0}",
                                               maDP);
 
             

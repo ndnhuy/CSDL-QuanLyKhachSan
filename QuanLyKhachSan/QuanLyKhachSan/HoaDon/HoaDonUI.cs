@@ -46,6 +46,7 @@ namespace QuanLyKhachSan.HoaDon
             catch (SqlException e)
             {
                 MessageBox.Show("Đã xảy ra lỗi.");
+                throw e;
             }
         }
 
@@ -55,7 +56,7 @@ namespace QuanLyKhachSan.HoaDon
             gridviewDatPhong.SelectionChanged += GridviewDatPhong_SelectionChanged;
             txtMaDP.KeyPress += TxtMaDP_KeyPress;
 
-            GetData(hoaDonDAO.getQueryStringOfAllDatPhong());
+            //GetData(hoaDonDAO.getQueryStringOfAllDatPhong());
            // GetData("select * from DatPhong");
         }
 
