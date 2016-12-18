@@ -17,7 +17,40 @@ namespace QuanLyKhachSan.HoaDon
         private const String SP_LAP_HOA_DON = "sp_lapHoaDon";
 
 
-        // Lập hóa 
+        public String buildQueryStringFromSearchArgs(int maDP, int maLoaiPhong, String CMND, String tenDangNhap)
+        {
+            String maDatPhongCondition = maDP == 0 ? "1 = 1" :
+                                         String.Format("DatPhong.maDP = {0}", maDP);
+            String maLoaiPhongCondition = maLoaiPhong == 0 ? "1 = 1" :
+                                                     String.Format("DatPhong.maLoaiPhong = {0}", maLoaiPhong);
+            String tenDangNhapCondition = tenDangNhap == "" ? "1 = 1" :
+                                                     String.Format("KhachHang.tenDangNhap = '{0}'", tenDangNhap);
+
+            String soCMNDCondition = CMND == "" ? "1 = 1" :
+                                                     String.Format("KhachHang.soCMND = '{0}'", CMND);
+
+            String query = @"select DatPhong.maDP, DatPhong.ngayBatDau, DatPhong.ngayDat, DatPhong.ngayTraPhong,
+		                                            LoaiPhong.maLoaiPhong, LoaiPhong.tenLoaiPhong, LoaiPhong.donGia,
+		                                            KhachSan.tenKS,
+		                                            KhachHang.hoTen,
+                                                    KhachHang.maKH
+                                            from DatPhong, KhachSan, KhachHang, LoaiPhong
+                                            where DatPhong.maLoaiPhong = LoaiPhong.maLoaiPhong
+                                            AND DatPhong.maKH = KhachHang.maKH
+                                            AND LoaiPhong.maKS = KhachSan.maKS
+                                            AND {0}
+                                            AND {1} 
+                                            AND DatPhong.maKH in (select maKH from KhachHang
+                                                                  where {2}
+                                                                  and {3})";
+
+            return String.Format(query, maDatPhongCondition,
+                                       maLoaiPhongCondition,
+                                       tenDangNhapCondition,
+                                       soCMNDCondition);
+        }
+
+
         public String getQueryStringOfAllDatPhong()
         {
             return @"select DatPhong.maDP, DatPhong.ngayBatDau, DatPhong.ngayDat, 
@@ -123,15 +156,26 @@ namespace QuanLyKhachSan.HoaDon
             }
         }
 
-        public HoaDon lapHoaDon(int maDP)
+        public HoaDon lapHoaDon(int maDP, int maLoaiPhong, String CMND, String tenDangNhap)
         {
+            String maDatPhongCondition = maDP == 0 ? "1 = 1" : 
+                                                     String.Format("DatPhong.maDP = {0}", maDP);
+            String maLoaiPhongCondition = maLoaiPhong == 0 ? "1 = 1" : 
+                                                     String.Format("DatPhong.maLoaiPhong = {0}", maLoaiPhong);
+            String tenDangNhapCondition = tenDangNhap == "" ? "1 = 1" :
+                                                     String.Format("KhachHang.tenDangNhap = '{0}'", tenDangNhap);
+
+            String soCMNDCondition = CMND == "" ? "1 = 1" :
+                                                     String.Format("KhachHang.soCMND = '{0}'", CMND);
+
+
             SqlConnection conn = new SqlConnection(connectionString);
             SqlDataReader reader = null;
             try
             {
                 conn.Open();
 
-                String query = String.Format(@"select DatPhong.maDP, DatPhong.ngayBatDau, DatPhong.ngayDat, DatPhong.ngayTraPhong,
+                String query = @"select DatPhong.maDP, DatPhong.ngayBatDau, DatPhong.ngayDat, DatPhong.ngayTraPhong,
 		                                            LoaiPhong.maLoaiPhong, LoaiPhong.tenLoaiPhong, LoaiPhong.donGia,
 		                                            KhachSan.tenKS,
 		                                            KhachHang.hoTen
@@ -139,11 +183,18 @@ namespace QuanLyKhachSan.HoaDon
                                             where DatPhong.maLoaiPhong = LoaiPhong.maLoaiPhong
                                             AND DatPhong.maKH = KhachHang.maKH
                                             AND LoaiPhong.maKS = KhachSan.maKS
-                                            AND DatPhong.maDP = {0}",
-                                              maDP);
+                                            AND {0}
+                                            AND {1} 
+                                            AND DatPhong.maKH in (select maKH from KhachHang
+                                                                  where {2}
+                                                                  and {3})";
 
-            
-                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlCommand cmd = new SqlCommand(String.Format(query, maDatPhongCondition, 
+                                                                     maLoaiPhongCondition, 
+                                                                     tenDangNhapCondition, 
+                                                                     soCMNDCondition), 
+                                                conn);
 
                 reader = cmd.ExecuteReader();
                 while (reader.Read())

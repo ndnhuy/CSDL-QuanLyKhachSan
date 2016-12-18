@@ -50,7 +50,7 @@ namespace QuanLyKhachSan.HoaDon
             textboxMaKH.KeyPress += TextboxNumberInputOnly_KeyPress;
             textboxThanhTien.KeyPress += TextboxNumberInputOnly_KeyPress;
 
-            GetData(queryAll());
+            //GetData(queryAll());
         }
 
         private void GridviewHoaDon_SelectionChanged(object sender, EventArgs e)
@@ -99,7 +99,6 @@ namespace QuanLyKhachSan.HoaDon
                 || textboxThanhTien.Text == "")
             {
                 MessageBox.Show("Chưa nhập đầy đủ thông tin tìm kiếm.");
-                GetData(queryAll());
                 return;
             }
 
@@ -126,8 +125,6 @@ namespace QuanLyKhachSan.HoaDon
 
         private String queryAll()
         {
-            //dateNgayLap.Value.ToShortDateString()
-            Console.WriteLine(dateNgayLap.Value.ToShortDateString());
             return "select hd.maDP, hd.maHD, hd.ngayThanhToan, hd.tongTien from HoaDon hd, DatPhong dp, KhachHang kh" +
                             " where hd.maDP = dp.maDP" +
                             " AND dp.maKH = kh.maKH";

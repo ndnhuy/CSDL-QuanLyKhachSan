@@ -50,10 +50,19 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.checkboxTimKiemDP = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnReload = new System.Windows.Forms.Button();
+            this.txtMaLoaiPhong = new System.Windows.Forms.TextBox();
+            this.txtTenDangNhap = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtCMND = new System.Windows.Forms.TextBox();
+            this.txtLoading = new System.Windows.Forms.Label();
+            this.txtMaKH = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridviewDatPhong)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -61,17 +70,17 @@
             // gridviewDatPhong
             // 
             this.gridviewDatPhong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridviewDatPhong.Location = new System.Drawing.Point(13, 320);
+            this.gridviewDatPhong.Location = new System.Drawing.Point(13, 363);
             this.gridviewDatPhong.Name = "gridviewDatPhong";
             this.gridviewDatPhong.ReadOnly = true;
             this.gridviewDatPhong.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridviewDatPhong.Size = new System.Drawing.Size(811, 181);
+            this.gridviewDatPhong.Size = new System.Drawing.Size(811, 155);
             this.gridviewDatPhong.TabIndex = 0;
             this.gridviewDatPhong.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridviewDatPhong_CellContentClick);
             // 
             // btnSaveHoaDon
             // 
-            this.btnSaveHoaDon.Location = new System.Drawing.Point(627, 276);
+            this.btnSaveHoaDon.Location = new System.Drawing.Point(627, 322);
             this.btnSaveHoaDon.Name = "btnSaveHoaDon";
             this.btnSaveHoaDon.Size = new System.Drawing.Size(91, 38);
             this.btnSaveHoaDon.TabIndex = 1;
@@ -81,16 +90,14 @@
             // 
             // txtMaDP
             // 
-            this.txtMaDP.Enabled = false;
-            this.txtMaDP.Location = new System.Drawing.Point(120, 12);
+            this.txtMaDP.Location = new System.Drawing.Point(113, 12);
             this.txtMaDP.Name = "txtMaDP";
-            this.txtMaDP.Size = new System.Drawing.Size(126, 20);
+            this.txtMaDP.Size = new System.Drawing.Size(100, 20);
             this.txtMaDP.TabIndex = 2;
             // 
             // btnTimDP
             // 
-            this.btnTimDP.Enabled = false;
-            this.btnTimDP.Location = new System.Drawing.Point(252, 12);
+            this.btnTimDP.Location = new System.Drawing.Point(457, 15);
             this.btnTimDP.Name = "btnTimDP";
             this.btnTimDP.Size = new System.Drawing.Size(139, 23);
             this.btnTimDP.TabIndex = 4;
@@ -247,20 +254,9 @@
             this.label11.TabIndex = 21;
             this.label11.Text = "KHÁCH SẠN";
             // 
-            // checkboxTimKiemDP
-            // 
-            this.checkboxTimKiemDP.AutoSize = true;
-            this.checkboxTimKiemDP.Location = new System.Drawing.Point(14, 14);
-            this.checkboxTimKiemDP.Name = "checkboxTimKiemDP";
-            this.checkboxTimKiemDP.Size = new System.Drawing.Size(95, 17);
-            this.checkboxTimKiemDP.TabIndex = 36;
-            this.checkboxTimKiemDP.Text = "Mã Đặt Phòng";
-            this.checkboxTimKiemDP.UseVisualStyleBackColor = true;
-            this.checkboxTimKiemDP.CheckedChanged += new System.EventHandler(this.checkboxTimKiemDP_CheckedChanged);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(724, 276);
+            this.button1.Location = new System.Drawing.Point(724, 322);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 38);
             this.button1.TabIndex = 37;
@@ -288,7 +284,7 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtTenKS);
             this.groupBox1.Controls.Add(this.txtTongTien);
-            this.groupBox1.Location = new System.Drawing.Point(12, 64);
+            this.groupBox1.Location = new System.Drawing.Point(12, 110);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(812, 206);
             this.groupBox1.TabIndex = 38;
@@ -297,7 +293,7 @@
             // 
             // btnReload
             // 
-            this.btnReload.Location = new System.Drawing.Point(14, 290);
+            this.btnReload.Location = new System.Drawing.Point(14, 336);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(75, 23);
             this.btnReload.TabIndex = 39;
@@ -305,15 +301,107 @@
             this.btnReload.UseVisualStyleBackColor = true;
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
+            // txtMaLoaiPhong
+            // 
+            this.txtMaLoaiPhong.Location = new System.Drawing.Point(326, 41);
+            this.txtMaLoaiPhong.Name = "txtMaLoaiPhong";
+            this.txtMaLoaiPhong.Size = new System.Drawing.Size(100, 20);
+            this.txtMaLoaiPhong.TabIndex = 42;
+            // 
+            // txtTenDangNhap
+            // 
+            this.txtTenDangNhap.Location = new System.Drawing.Point(326, 64);
+            this.txtTenDangNhap.Name = "txtTenDangNhap";
+            this.txtTenDangNhap.Size = new System.Drawing.Size(100, 20);
+            this.txtTenDangNhap.TabIndex = 43;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "Mã Đặt Phòng";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(232, 44);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(79, 13);
+            this.label10.TabIndex = 45;
+            this.label10.Text = "Mã Loại Phòng";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(224, 67);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(84, 13);
+            this.label12.TabIndex = 46;
+            this.label12.Text = "Tên Đăng Nhập";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(272, 18);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "CMND";
+            // 
+            // txtCMND
+            // 
+            this.txtCMND.Location = new System.Drawing.Point(326, 15);
+            this.txtCMND.Name = "txtCMND";
+            this.txtCMND.Size = new System.Drawing.Size(100, 20);
+            this.txtCMND.TabIndex = 48;
+            // 
+            // txtLoading
+            // 
+            this.txtLoading.AutoSize = true;
+            this.txtLoading.ForeColor = System.Drawing.Color.DarkRed;
+            this.txtLoading.Location = new System.Drawing.Point(110, 341);
+            this.txtLoading.Name = "txtLoading";
+            this.txtLoading.Size = new System.Drawing.Size(0, 13);
+            this.txtLoading.TabIndex = 49;
+            // 
+            // txtMaKH
+            // 
+            this.txtMaKH.Location = new System.Drawing.Point(724, 84);
+            this.txtMaKH.Name = "txtMaKH";
+            this.txtMaKH.ReadOnly = true;
+            this.txtMaKH.Size = new System.Drawing.Size(100, 20);
+            this.txtMaKH.TabIndex = 50;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(631, 87);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(85, 13);
+            this.label14.TabIndex = 51;
+            this.label14.Text = "Mã Khách Hàng";
+            // 
             // HoaDonUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 513);
+            this.ClientSize = new System.Drawing.Size(925, 530);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.txtMaKH);
+            this.Controls.Add(this.txtLoading);
+            this.Controls.Add(this.txtCMND);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtTenDangNhap);
+            this.Controls.Add(this.txtMaLoaiPhong);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkboxTimKiemDP);
             this.Controls.Add(this.btnTimDP);
             this.Controls.Add(this.txtMaDP);
             this.Controls.Add(this.btnSaveHoaDon);
@@ -353,9 +441,18 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox checkboxTimKiemDP;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnReload;
+        private System.Windows.Forms.TextBox txtMaLoaiPhong;
+        private System.Windows.Forms.TextBox txtTenDangNhap;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtCMND;
+        private System.Windows.Forms.Label txtLoading;
+        private System.Windows.Forms.TextBox txtMaKH;
+        private System.Windows.Forms.Label label14;
     }
 }
