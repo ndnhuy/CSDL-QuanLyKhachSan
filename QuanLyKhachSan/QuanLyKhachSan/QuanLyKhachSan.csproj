@@ -36,9 +36,16 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalDecisions.Windows.Forms.1.0.0\lib\CrystalDecisions.Windows.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ThongKe\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="HoaDon\HoaDon.cs" />
     <Compile Include="HoaDon\HoaDonDAO.cs" />
     <Compile Include="HoaDon\HoaDonUI.cs">
@@ -103,6 +115,19 @@
     <Compile Include="Phong\TrangThaiPhongDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThongKe\DoanhThuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThongKe\DoanhThuForm.Designer.cs">
+      <DependentUpon>DoanhThuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThongKe\LoaiPhongSlTrongDAO.cs" />
+    <Compile Include="ThongKe\SlTrongReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThongKe\SlTrongReport.Designer.cs">
+      <DependentUpon>SlTrongReport.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="HoaDon\HoaDonUI.resx">
       <DependentUpon>HoaDonUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,6 +158,26 @@
     <EmbeddedResource Include="KhachHang\TaoTaiKhoanUI.resx">
       <DependentUpon>TaoTaiKhoanUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ThongKe\DoanhThuForm.resx">
+      <DependentUpon>DoanhThuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThongKe\Report1.rdlc" />
+    <EmbeddedResource Include="ThongKe\Report2.rdlc" />
+    <EmbeddedResource Include="ThongKe\SlTrongReport.resx">
+      <DependentUpon>SlTrongReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ThongKe\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ThongKe\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ThongKe\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -146,7 +191,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,6 @@
 ﻿using QuanLyKhachSan.HoaDon;
 using QuanLyKhachSan.KhachHang;
+using QuanLyKhachSan.ThongKe;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,16 @@ namespace QuanLyKhachSan
         private void btnHoaDon_Click(object sender, EventArgs e)
         {
             new HoaDonUI().Show();
+        }
+
+        private void btnDoanhThu_Click(object sender, EventArgs e)
+        {
+            new DoanhThuForm().Show();
+        }
+
+        private void btnSoLuongTrong_Click(object sender, EventArgs e)
+        {
+            new SlTrongReport().Show();
         }
     }
 }

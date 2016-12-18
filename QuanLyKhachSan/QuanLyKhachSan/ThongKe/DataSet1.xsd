@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="QLKSConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="QLKSConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.QuanLyKhachSan.Properties.Settings.GlobalReference.Default.QLKSConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="QLKSConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select Year(ngayThanhToan) as Nam, Month(ngayThanhToan) as Thang, Day(ngayThanhToan) as Ngay, Sum(tongTien) Tong
+from HoaDon
+group by year(ngayThanhToan), month(ngayThanhToan), day(ngayThanhToan)
+order by year(ngayThanhToan), month(ngayThanhToan), day(ngayThanhToan)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Tong" DataSetColumn="Tong" />
+              <Mapping SourceColumn="Ngay" DataSetColumn="Ngay" />
+              <Mapping SourceColumn="Nam" DataSetColumn="Nam" />
+              <Mapping SourceColumn="Thang" DataSetColumn="Thang" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SlTrongReportDataTableTableAdapter" GeneratorDataComponentClassName="SlTrongReportDataTableTableAdapter" Name="SlTrongReportDataTable" UserDataComponentName="SlTrongReportDataTableTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="QLKSConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select KhachSan.tenKS, LoaiPhong.tenLoaiPhong, LoaiPhong.slTrong, KhachSan.thanhPho, KhachSan.soSao
+from LoaiPhong
+inner join KhachSan
+on LoaiPhong.maKS = KhachSan.maKS
+order by KhachSan.thanhPho, KhachSan.soSao</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="tenKS" DataSetColumn="tenKS" />
+              <Mapping SourceColumn="tenLoaiPhong" DataSetColumn="tenLoaiPhong" />
+              <Mapping SourceColumn="slTrong" DataSetColumn="slTrong" />
+              <Mapping SourceColumn="thanhPho" DataSetColumn="thanhPho" />
+              <Mapping SourceColumn="soSao" DataSetColumn="soSao" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Tong" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTong" msprop:Generator_ColumnPropNameInRow="Tong" msprop:Generator_ColumnPropNameInTable="TongColumn" msprop:Generator_UserColumnName="Tong" type="xs:long" minOccurs="0" />
+              <xs:element name="Ngay" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNgay" msprop:Generator_ColumnPropNameInRow="Ngay" msprop:Generator_ColumnPropNameInTable="NgayColumn" msprop:Generator_UserColumnName="Ngay" type="xs:int" minOccurs="0" />
+              <xs:element name="Nam" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNam" msprop:Generator_ColumnPropNameInRow="Nam" msprop:Generator_ColumnPropNameInTable="NamColumn" msprop:Generator_UserColumnName="Nam" type="xs:int" minOccurs="0" />
+              <xs:element name="Thang" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnThang" msprop:Generator_ColumnPropNameInRow="Thang" msprop:Generator_ColumnPropNameInTable="ThangColumn" msprop:Generator_UserColumnName="Thang" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SlTrongReportDataTable" msprop:Generator_TableClassName="SlTrongReportDataTableDataTable" msprop:Generator_TableVarName="tableSlTrongReportDataTable" msprop:Generator_RowChangedName="SlTrongReportDataTableRowChanged" msprop:Generator_TablePropName="SlTrongReportDataTable" msprop:Generator_RowDeletingName="SlTrongReportDataTableRowDeleting" msprop:Generator_RowChangingName="SlTrongReportDataTableRowChanging" msprop:Generator_RowEvHandlerName="SlTrongReportDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="SlTrongReportDataTableRowDeleted" msprop:Generator_RowClassName="SlTrongReportDataTableRow" msprop:Generator_UserTableName="SlTrongReportDataTable" msprop:Generator_RowEvArgName="SlTrongReportDataTableRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="tenKS" msprop:Generator_ColumnVarNameInTable="columntenKS" msprop:Generator_ColumnPropNameInRow="tenKS" msprop:Generator_ColumnPropNameInTable="tenKSColumn" msprop:Generator_UserColumnName="tenKS">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tenLoaiPhong" msprop:Generator_ColumnVarNameInTable="columntenLoaiPhong" msprop:Generator_ColumnPropNameInRow="tenLoaiPhong" msprop:Generator_ColumnPropNameInTable="tenLoaiPhongColumn" msprop:Generator_UserColumnName="tenLoaiPhong">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="slTrong" msprop:Generator_ColumnVarNameInTable="columnslTrong" msprop:Generator_ColumnPropNameInRow="slTrong" msprop:Generator_ColumnPropNameInTable="slTrongColumn" msprop:Generator_UserColumnName="slTrong" type="xs:int" />
+              <xs:element name="thanhPho" msprop:Generator_ColumnVarNameInTable="columnthanhPho" msprop:Generator_ColumnPropNameInRow="thanhPho" msprop:Generator_ColumnPropNameInTable="thanhPhoColumn" msprop:Generator_UserColumnName="thanhPho">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="soSao" msprop:Generator_ColumnVarNameInTable="columnsoSao" msprop:Generator_ColumnPropNameInRow="soSao" msprop:Generator_ColumnPropNameInTable="soSaoColumn" msprop:Generator_UserColumnName="soSao" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

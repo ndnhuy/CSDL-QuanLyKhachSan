@@ -10,6 +10,7 @@ using System.Configuration;
 using QuanLyKhachSan.KhachSan;
 using QuanLyKhachSan.Phong;
 using QuanLyKhachSan.HoaDon;
+using QuanLyKhachSan.ThongKe;
 
 namespace QuanLyKhachSan
 {
@@ -69,6 +70,8 @@ namespace QuanLyKhachSan
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HomeUI());
+            //Application.Run(new DoanhThuForm());
+            //Application.Run(new SlTrongReport());
         }
     }
 }

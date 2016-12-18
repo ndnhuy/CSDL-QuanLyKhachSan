@@ -78,9 +78,9 @@ namespace QuanLyKhachSan.Phong
 
         private void DateBatDau_ValueChanged(object sender, EventArgs e)
         {
-            DateTimePicker datetime = (DateTimePicker)sender;
+            //DateTimePicker datetime = (DateTimePicker)sender;
             // if pickanydate return -1, then show error
-            int maLoaiPhong = (int)gridviewPhong.SelectedRows[0].Cells["maLoaiPhong"].Value;
+            //int maLoaiPhong = (int)gridviewPhong.SelectedRows[0].Cells["maLoaiPhong"].Value;
             //if (datphongDAO.pickAnyAvailableRoom(maLoaiPhong, datetime.Value) == -1)
             //{
             //    MessageBox.Show("Ngày bắt đầu không hợp lệ vì không còn phòng trống");

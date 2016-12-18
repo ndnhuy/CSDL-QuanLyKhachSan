@@ -42,7 +42,7 @@ INSERT INTO [dbo].[KhachSan]
            , '111/8'
            , N'Phạm Văn Chiêu'
            , N'Gò Vấp'
-           , N'Hồ Chí Minh'
+           , N'TPHCM'
            , 2000000
            , N'Khách sạn đẹp nhất thế giới')
 
@@ -61,7 +61,7 @@ INSERT INTO [dbo].[KhachSan]
            , N'111/8'
            , N'Phạm Văn Chiêu'
            , N'Gò Vấp'
-           , N'Hồ Chí Minh'
+           , N'TPHCM'
            , 2000000
            , N'Khách sạn đẹp nhất thế giới')
 
@@ -91,6 +91,34 @@ INSERT INTO [dbo].[LoaiPhong]
      VALUES (
            N'VIP'
            , 1
+           , 2000000
+           , N'Khách sạn của VIP'
+           , 0)
+GO
+
+INSERT INTO [dbo].[LoaiPhong]
+           ([tenLoaiPhong]
+           ,[maKS]
+           ,[donGia]
+           ,[moTa]
+           ,[slTrong])
+     VALUES (
+           N'Bình thường'
+           , 2
+           , 500000
+           , N'Khách sạn không nên ở'
+           , 0)
+GO
+
+INSERT INTO [dbo].[LoaiPhong]
+           ([tenLoaiPhong]
+           ,[maKS]
+           ,[donGia]
+           ,[moTa]
+           ,[slTrong])
+     VALUES (
+           N'VIP'
+           , 2
            , 2000000
            , N'Khách sạn của VIP'
            , 0)
@@ -137,6 +165,22 @@ INSERT INTO [dbo].[Phong]
      VALUES
            (1
            ,5)
+GO
+
+INSERT INTO [dbo].[Phong]
+           ([loaiPhong]
+           ,[soPhong])
+     VALUES
+           (3
+           ,6)
+GO
+
+INSERT INTO [dbo].[Phong]
+           ([loaiPhong]
+           ,[soPhong])
+     VALUES
+           (4
+           ,7)
 GO
 
 --USE [QuanLyKhachSan]

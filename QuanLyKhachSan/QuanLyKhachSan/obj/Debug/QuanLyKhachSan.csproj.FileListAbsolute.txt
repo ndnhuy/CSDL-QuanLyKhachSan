@@ -13,3 +13,12 @@ D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.HoaDon.HoaDonUI.resources
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.HoaDon.TimKiemHoaDonUI.resources
 D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.HomeUI.resources
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\bin\Debug\CrystalDecisions.ReportSource.dll
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\bin\Debug\CrystalDecisions.Shared.dll
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\bin\Debug\CrystalDecisions.Windows.Forms.dll
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\RdlCompile.cache
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\RdlCompile.compiled
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.SlTrongReport.resources
+D:\Study\Univer\CSDL\DATH\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.ThongKe.DoanhThuForm.resources

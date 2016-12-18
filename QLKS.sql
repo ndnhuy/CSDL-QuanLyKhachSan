@@ -390,3 +390,11 @@ go
 create index IX_HoaDon_ngayThanhToan_tongTien on HoaDon (ngayThanhToan, tongTien)
 
 go
+
+-- TRIGGERS
+create trigger update_sltrong on LoaiPhong
+for select
+as
+begin
+	
+end
