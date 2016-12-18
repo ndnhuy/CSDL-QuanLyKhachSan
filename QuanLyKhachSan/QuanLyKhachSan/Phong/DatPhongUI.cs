@@ -121,7 +121,15 @@ namespace QuanLyKhachSan.Phong
             if (datphong.NgayTraPhong <= datphong.NgayBatDau)
             {
                 MessageBox.Show("Ngày trả phòng phải sau ngày bắt đầu");
-                gridviewPhong.Rows.Clear();
+                try
+                {
+                    gridviewPhong.Rows.Clear();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
                 return;
             }
 
